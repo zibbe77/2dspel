@@ -7,7 +7,6 @@ public class Toolbox
     {
         // Vector2 v = new Vector2(30, 70);
 
-
         if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT))
         {
             witchpos[0]--;
@@ -25,5 +24,11 @@ public class Toolbox
             witchpos[1]--;
         }
         return witchpos;
+    }
+    public static void Hitboxes(Rectangle r1, Rectangle r2){
+        bool areOverlapping = Raylib.CheckCollisionRecs(r1, r2); // true
+        if(areOverlapping == true){
+            System.Console.WriteLine("areOverlapping");
+        }
     }
 }
