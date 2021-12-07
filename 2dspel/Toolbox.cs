@@ -3,32 +3,45 @@ using Raylib_cs;
 using System.Numerics;
 public class Toolbox
 {
-    public static float[] Poswitch(float[] witchpos)
+    public static Rectangle Poswitch(Rectangle witchRect)
     {
         // Vector2 v = new Vector2(30, 70);
 
         if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT))
         {
-            witchpos[0]--;
+            witchRect.x--;
         }
         if (Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT))
         {
-            witchpos[0]++;
+            witchRect.x++;
         }
         if (Raylib.IsKeyDown(KeyboardKey.KEY_DOWN))
         {
-            witchpos[1]++;
+            witchRect.y++;
         }
         if (Raylib.IsKeyDown(KeyboardKey.KEY_UP))
         {
-            witchpos[1]--;
+            witchRect.y--;
         }
-        return witchpos;
+        return witchRect;
     }
-    public static void Hitboxes(Rectangle r1, Rectangle r2){
+    public static int Hitboxes(Rectangle r1, Rectangle r2, Rectangle r3, Rectangle r4, int points)
+    {
         bool areOverlapping = Raylib.CheckCollisionRecs(r1, r2); // true
-        if(areOverlapping == true){
+        if (areOverlapping == true)
+        {
             System.Console.WriteLine("areOverlapping");
+            Raylib.DrawRectangleRec(r3, Color.RED);
         }
+        bool areOverlapping2 = Raylib.CheckCollisionRecs(r1, r4);
+        if (areOverlapping2 != true)
+        {
+            Raylib.DrawRectangleRec(r4, Color.GREEN);
+        }
+        else
+        {
+            points++;
+        }
+        return points;
     }
 }
