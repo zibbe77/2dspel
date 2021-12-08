@@ -6,7 +6,7 @@ Raylib.SetTargetFPS(60);
 
 float[] witchpos = new float[2];
 Texture2D witchTexture = Raylib.LoadTexture(@"witch3.png");
-Rectangle witchRect = new Rectangle(0, 0, witchTexture.width, witchTexture.height);
+Rectangle witchRect = new Rectangle(1000, 1000, witchTexture.width, witchTexture.height);
 
 string pointsS = "0";
 int points = 0;
@@ -22,15 +22,12 @@ while (!Raylib.WindowShouldClose())
     witchRect = Toolbox.Poswitch(witchRect);
 
     //Collison 
-    Toolbox.Hitboxes(witchRect, r2, r3, r4, points);
+    pointsS = Toolbox.Hitboxes(witchRect, r2, r3, r4, points, pointsS);
 
     //konventerar från float till int (texturer behöver ints)
     int x = (int)witchRect.x;
     int y = (int)witchRect.y;
-
-    //text
-    points = int.Parse(pointsS);
-
+    
     //ritar saker
     Raylib.BeginDrawing();
 
