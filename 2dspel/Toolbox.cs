@@ -23,10 +23,15 @@ public class Toolbox
         {
             witchRect.y--;
         }
+
+        //förhindrar att gå utan för kartan
+
+        
         return witchRect;
     }
-    public static int Hitboxes(Rectangle r1, Rectangle r2, Rectangle r3, Rectangle r4, int points)
+    public static string Hitboxes(Rectangle r1, Rectangle r2, Rectangle r3, Rectangle r4, int points, string pointsS)
     {
+        bool picktUp = false;
         bool areOverlapping = Raylib.CheckCollisionRecs(r1, r2); // true
         if (areOverlapping == true)
         {
@@ -34,14 +39,16 @@ public class Toolbox
             Raylib.DrawRectangleRec(r3, Color.RED);
         }
         bool areOverlapping2 = Raylib.CheckCollisionRecs(r1, r4);
-        if (areOverlapping2 != true)
+        if (areOverlapping2 != true && picktUp == false)
         {
             Raylib.DrawRectangleRec(r4, Color.GREEN);
         }
-        else
-        {
-            points++;
+        else if(picktUp == false){
+            points++; 
+            pointsS = points.ToString();
+            picktUp = true; 
         }
-        return points;
+
+        return pointsS;
     }
 }
