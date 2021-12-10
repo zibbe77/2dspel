@@ -1,6 +1,12 @@
 using System;
 using Raylib_cs;
 using System.Numerics;
+
+public class Traking {
+    public int points = 0;
+    public string pointsS = "";
+    public bool picktUpR4 = false;
+}
 public class Toolbox
 {
     public static Rectangle Poswitch(Rectangle witchRect)
@@ -25,13 +31,12 @@ public class Toolbox
         }
 
         //förhindrar att gå utan för kartan
-
         
         return witchRect;
     }
-    public static string Hitboxes(Rectangle r1, Rectangle r2, Rectangle r3, Rectangle r4, int points, string pointsS)
+    public static Traking Hitboxes(Rectangle r1, Rectangle r2, Rectangle r3, Rectangle r4, Traking T1)
     {
-        bool picktUp = false;
+        
         bool areOverlapping = Raylib.CheckCollisionRecs(r1, r2); // true
         if (areOverlapping == true)
         {
@@ -39,16 +44,16 @@ public class Toolbox
             Raylib.DrawRectangleRec(r3, Color.RED);
         }
         bool areOverlapping2 = Raylib.CheckCollisionRecs(r1, r4);
-        if (areOverlapping2 != true && picktUp == false)
+        if (T1.picktUpR4 == false && areOverlapping2 == false)
         {
             Raylib.DrawRectangleRec(r4, Color.GREEN);
         }
-        else if(picktUp == false){
-            points++; 
-            pointsS = points.ToString();
-            picktUp = true; 
+        else if(T1.picktUpR4 == false){
+            T1.points++;
+            T1.pointsS = T1.points.ToString();
+            T1.picktUpR4 = true; 
         }
 
-        return pointsS;
+        return T1;
     }
 }
