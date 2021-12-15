@@ -2,14 +2,15 @@ using System;
 using Raylib_cs;
 using System.Numerics;
 
-public class Traking {
+public class Traking
+{
     public int points = 0;
     public string pointsS = "";
     public bool picktUpR4 = false;
 }
 public class Toolbox
 {
-    public static Rectangle Poswitch(Rectangle witchRect)
+    public static Rectangle Poswitch(Rectangle witchRect, Rectangle border)
     {
         // Vector2 v = new Vector2(30, 70);
 
@@ -31,29 +32,44 @@ public class Toolbox
         }
 
         //förhindrar att gå utan för kartan
-        
+        if(witchRect.x < border.x){
+            witchRect.x++;
+        }
+        if(witchRect.x > border.width - witchRect.width){
+            witchRect.x--;
+        }
+         if(witchRect.y < border.y){
+            witchRect.y++;
+        }
+        if(witchRect.y > border.height - witchRect.height){
+            witchRect.y--; 
+        }
         return witchRect;
     }
     public static Traking Hitboxes(Rectangle r1, Rectangle r2, Rectangle r3, Rectangle r4, Traking T1)
     {
-        
         bool areOverlapping = Raylib.CheckCollisionRecs(r1, r2); // true
         if (areOverlapping == true)
         {
             System.Console.WriteLine("areOverlapping");
             Raylib.DrawRectangleRec(r3, Color.RED);
         }
-        bool areOverlapping2 = Raylib.CheckCollisionRecs(r1, r4);
-        if (T1.picktUpR4 == false && areOverlapping2 == false)
+
+        for (int i = 0; i < 5; i++)
         {
-            Raylib.DrawRectangleRec(r4, Color.GREEN);
-        }
-        else if(T1.picktUpR4 == false){
-            T1.points++;
-            T1.pointsS = T1.points.ToString();
-            T1.picktUpR4 = true; 
+            bool areOverlapping2 = Raylib.CheckCollisionRecs(r1, r4);
+            if (T1.picktUpR4 == false && areOverlapping2 == false)
+            {
+                Raylib.DrawRectangleRec(r4, Color.GREEN);
+            }
+            else if (T1.picktUpR4 == false)
+            {
+                T1.points++;
+                T1.pointsS = T1.points.ToString();
+                T1.picktUpR4 = true;
+            }
         }
 
-        return T1;
+    return T1;
     }
 }
