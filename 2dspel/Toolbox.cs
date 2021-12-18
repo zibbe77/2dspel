@@ -7,42 +7,61 @@ public class Traking
     public int points = 0;
     public string pointsS = "";
     public bool[] picktUpR4 = new bool[5];
+    public bool[] witchCheckX = { false, false };
+    public bool[] witchCheckY = { false, false };
+    public Rectangle witchRect = new Rectangle();
+
 }
 public class Toolbox
 {
-    public static Rectangle Poswitch(Rectangle witchRect, Rectangle border)
+    public static Rectangle Poswitch(Rectangle witchRect, Rectangle border, Traking T1)
     {
         // Vector2 v = new Vector2(30, 70);
-
+        for(int i = 0;i < 2;i++){
+            T1.witchCheckX[i] = false;
+            T1.witchCheckY[i] = false;
+        }
         if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT))
         {
             witchRect.x--;
+            T1.witchCheckX[0] = true;
         }
         if (Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT))
         {
             witchRect.x++;
+            T1.witchCheckX[1] = true;
         }
         if (Raylib.IsKeyDown(KeyboardKey.KEY_DOWN))
         {
             witchRect.y++;
+            T1.witchCheckY[1] = true;
         }
         if (Raylib.IsKeyDown(KeyboardKey.KEY_UP))
         {
             witchRect.y--;
+            T1.witchCheckY[0] = true;
         }
 
         //förhindrar att gå utan för kartan
-        if(witchRect.x < border.x){
+        if (witchRect.x < border.x)
+        {
             witchRect.x++;
+            T1.witchCheckX[1] = false;
         }
-        if(witchRect.x > border.width - witchRect.width){
+        if (witchRect.x > border.width - witchRect.width)
+        {
             witchRect.x--;
+            T1.witchCheckX[0] = false;
         }
-         if(witchRect.y < border.y){
+        if (witchRect.y < border.y)
+        {
             witchRect.y++;
+            T1.witchCheckY[1] = false;
         }
-        if(witchRect.y > border.height - witchRect.height){
-            witchRect.y--; 
+        if (witchRect.y > border.height - witchRect.height)
+        {
+            witchRect.y--;
+            T1.witchCheckY[0] = false;
         }
         return witchRect;
     }
@@ -69,14 +88,20 @@ public class Toolbox
                 T1.picktUpR4[i] = true;
             }
         }
-        for (int i = 0; i < 5; i++){
+        for (int i = 0; i < 5; i++)
+        {
             Raylib.DrawRectangleRec(obstical[i], Color.BLACK);
             bool areOverlapping3 = Raylib.CheckCollisionRecs(r1, obstical[i]);
-            if(areOverlapping3 == true){
-                
+            if (areOverlapping3 == true)
+            {
+                if(T1.witchCheckX[0] == true){T1.witchRect.x++;}
+                if(T1.witchCheckX[1] == true){T1.witchRect.x--;}
+                if(T1.witchCheckY[0] == true){T1.witchRect.y++;}
+                if(T1.witchCheckY[1] == true){T1.witchRect.y--;}
+                System.Console.WriteLine("möts");
             }
         }
 
-    return T1;
+        return T1;
     }
 }
