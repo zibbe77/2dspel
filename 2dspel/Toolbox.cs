@@ -46,7 +46,7 @@ public class Toolbox
         }
         return witchRect;
     }
-    public static Traking Hitboxes(Rectangle r1, Rectangle r2, Rectangle r3, Rectangle r4, Traking T1)
+    public static Traking Hitboxes(Rectangle r1, Rectangle r2, Rectangle r3, Rectangle points, Traking T1)
     {
         bool areOverlapping = Raylib.CheckCollisionRecs(r1, r2); // true
         if (areOverlapping == true)
@@ -57,10 +57,10 @@ public class Toolbox
 
         for (int i = 0; i < 5; i++)
         {
-            bool areOverlapping2 = Raylib.CheckCollisionRecs(r1, r4);
+            bool areOverlapping2 = Raylib.CheckCollisionRecs(r1, points);
             if (T1.picktUpR4 == false && areOverlapping2 == false)
             {
-                Raylib.DrawRectangleRec(r4, Color.GREEN);
+                Raylib.DrawRectangleRec(points, Color.GREEN);
             }
             else if (T1.picktUpR4 == false)
             {

@@ -12,7 +12,10 @@ Traking T1 = new Traking();
 Rectangle border = new Rectangle(0, 0, Raylib.GetScreenWidth(), Raylib.GetScreenHeight());
 Rectangle r2 = new Rectangle(Raylib.GetScreenWidth() / 2, Raylib.GetScreenHeight() / 2, 100, 100);
 Rectangle r3 = new Rectangle(0, 0, Raylib.GetScreenWidth(), Raylib.GetScreenHeight());
-Rectangle r4 = new Rectangle(Raylib.GetScreenWidth() / 2, Raylib.GetScreenHeight() / 2, 200, 200);
+Rectangle points = new Rectangle(Raylib.GetScreenWidth() / 2, Raylib.GetScreenHeight() / 2, 200, 200);
+
+Rectangle[] test = new Rectangle[3];
+
 Font f1 = Raylib.LoadFont(@"Metrophobic.ttf");
 
 while (!Raylib.WindowShouldClose())
@@ -21,7 +24,7 @@ while (!Raylib.WindowShouldClose())
     witchRect = Toolbox.Poswitch(witchRect, border);
 
     //Collison 
-    T1 = Toolbox.Hitboxes(witchRect, r2, r3, r4, T1);
+    T1 = Toolbox.Hitboxes(witchRect, r2, r3, points, T1);
 
     //konventerar från float till int (texturer behöver ints)
     int x = (int)witchRect.x;
