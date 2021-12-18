@@ -9,13 +9,23 @@ Texture2D witchTexture = Raylib.LoadTexture(@"witch3.png");
 Rectangle witchRect = new Rectangle(1000, 1000, witchTexture.width, witchTexture.height);
 
 Traking T1 = new Traking();
+
 Rectangle border = new Rectangle(0, 0, Raylib.GetScreenWidth(), Raylib.GetScreenHeight());
 Rectangle r2 = new Rectangle(Raylib.GetScreenWidth() / 2, Raylib.GetScreenHeight() / 2, 100, 100);
 Rectangle r3 = new Rectangle(0, 0, Raylib.GetScreenWidth(), Raylib.GetScreenHeight());
-Rectangle points = new Rectangle(Raylib.GetScreenWidth() / 2, Raylib.GetScreenHeight() / 2, 200, 200);
+Rectangle[] points = new Rectangle[5];
+Rectangle[] obstical = new Rectangle[5];
 
-Rectangle[] test = new Rectangle[3];
+for(int i = 0; i < 5; i++){
+    Rectangle obsticalRefrens = new Rectangle(Raylib.GetScreenWidth() / 4, Raylib.GetScreenHeight() / 2 + i * 100, 100, 100);
+    obstical[i] = obsticalRefrens;
+}
 
+for (int i = 0; i < 5; i++){
+    Rectangle pointsRefrens = new Rectangle(Raylib.GetScreenWidth() / 3, Raylib.GetScreenHeight() / 2 + i * 40, 20, 20);
+    points[i] = pointsRefrens;
+    T1.picktUpR4[i] = false;
+}
 Font f1 = Raylib.LoadFont(@"Metrophobic.ttf");
 
 while (!Raylib.WindowShouldClose())
@@ -24,7 +34,7 @@ while (!Raylib.WindowShouldClose())
     witchRect = Toolbox.Poswitch(witchRect, border);
 
     //Collison 
-    T1 = Toolbox.Hitboxes(witchRect, r2, r3, points, T1);
+    T1 = Toolbox.Hitboxes(witchRect, r2, r3, points, T1, obstical);
 
     //konventerar från float till int (texturer behöver ints)
     int x = (int)witchRect.x;

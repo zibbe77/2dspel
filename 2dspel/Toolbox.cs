@@ -6,7 +6,7 @@ public class Traking
 {
     public int points = 0;
     public string pointsS = "";
-    public bool picktUpR4 = false;
+    public bool[] picktUpR4 = new bool[5];
 }
 public class Toolbox
 {
@@ -46,7 +46,7 @@ public class Toolbox
         }
         return witchRect;
     }
-    public static Traking Hitboxes(Rectangle r1, Rectangle r2, Rectangle r3, Rectangle points, Traking T1)
+    public static Traking Hitboxes(Rectangle r1, Rectangle r2, Rectangle r3, Rectangle[] points, Traking T1, Rectangle[] obstical)
     {
         bool areOverlapping = Raylib.CheckCollisionRecs(r1, r2); // true
         if (areOverlapping == true)
@@ -57,16 +57,23 @@ public class Toolbox
 
         for (int i = 0; i < 5; i++)
         {
-            bool areOverlapping2 = Raylib.CheckCollisionRecs(r1, points);
-            if (T1.picktUpR4 == false && areOverlapping2 == false)
+            bool areOverlapping2 = Raylib.CheckCollisionRecs(r1, points[i]);
+            if (T1.picktUpR4[i] == false && areOverlapping2 == false)
             {
-                Raylib.DrawRectangleRec(points, Color.GREEN);
+                Raylib.DrawRectangleRec(points[i], Color.GREEN);
             }
-            else if (T1.picktUpR4 == false)
+            else if (T1.picktUpR4[i] == false)
             {
                 T1.points++;
                 T1.pointsS = T1.points.ToString();
-                T1.picktUpR4 = true;
+                T1.picktUpR4[i] = true;
+            }
+        }
+        for (int i = 0; i < 5; i++){
+            Raylib.DrawRectangleRec(obstical[i], Color.BLACK);
+            bool areOverlapping3 = Raylib.CheckCollisionRecs(r1, obstical[i]);
+            if(areOverlapping3 == true){
+                
             }
         }
 
