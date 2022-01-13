@@ -1,6 +1,7 @@
 ﻿using System;
 using Raylib_cs;
 using System.Numerics;
+using System.Collections.Generic;
 
 Raylib.InitWindow(Raylib.GetScreenWidth(), Raylib.GetScreenHeight(), "Hello World");
 Raylib.SetTargetFPS(60);
@@ -9,6 +10,7 @@ float[] witchpos = new float[2];
 Texture2D witchTexture = Raylib.LoadTexture(@"witch3.png");
 witchTexture.height = 200;
 witchTexture.width = 200;
+
 
 Traking T1 = new Traking();
 Rectangle witchRect1 = new Rectangle(1000, 1000, witchTexture.width, witchTexture.height);
@@ -44,6 +46,9 @@ while (!Raylib.WindowShouldClose())
 {
     // rörelse
     T1.witchRect = Toolbox.Poswitch(T1.witchRect, border, T1);
+
+    //sjuta 
+    T1 = Toolbox.BuletMove(T1);
 
     //Collison 
     T1 = Toolbox.Hitboxes(T1.witchRect, r2, r3, points, T1, obstical);
