@@ -12,6 +12,7 @@ Texture2D witchTexture = Raylib.LoadTexture(@"witch3.png");
 witchTexture.height = 200;
 witchTexture.width = 200;
 
+
 Traking T1 = new Traking();
 //bestämer att en av t1 varjablar är lika med en annan recktangel
 Rectangle witchRect1 = new Rectangle(1000, 1000, witchTexture.width, witchTexture.height);
@@ -49,6 +50,9 @@ while (!Raylib.WindowShouldClose())
 {
     // rörelse
     T1.witchRect = Toolbox.Poswitch(T1.witchRect, border, T1);
+
+    //sjuta 
+    T1 = Toolbox.BuletMove(T1);
 
     //Collison 
     T1 = Toolbox.Hitboxes(T1.witchRect, r2, r3, points, T1, obstical);
