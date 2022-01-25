@@ -6,14 +6,18 @@ Raylib.InitWindow(Raylib.GetScreenWidth(), Raylib.GetScreenHeight(), "Hello Worl
 Raylib.SetTargetFPS(60);
 
 
+Player p1 = new Player();
+p1.position.X = 400;
+p1.position.Y = 400;
+
 //witch varjablar
 float[] witchpos = new float[2];
 Texture2D witchTexture = Raylib.LoadTexture(@"witch3.png");
 witchTexture.height = 200;
 witchTexture.width = 200;
 
-
 Traking T1 = new Traking();
+
 //bestämer att en av t1 varjablar är lika med en annan recktangel
 Rectangle witchRect1 = new Rectangle(1000, 1000, witchTexture.width, witchTexture.height);
 T1.witchRect = witchRect1;
@@ -28,17 +32,20 @@ Rectangle border = new Rectangle(0, 0, Raylib.GetScreenWidth(), Raylib.GetScreen
 double floor = Math.Floor(border.width / 100.0) * 100.0;
 double floor1 = Math.Floor(border.height / 100.0) * 100.0;
 int[] mapSize = new int[2];
-//glömt vad den gör 
+
+//konverterar double till int
 mapSize[0] = Convert.ToInt32(floor);
 mapSize[1] = Convert.ToInt32(floor1);
 
 //ger värden på flera obijekt 
-for(int i = 0; i < 5; i++){
+for (int i = 0; i < 5; i++)
+{
     Rectangle obsticalRefrens = new Rectangle(Raylib.GetScreenWidth() / 4, Raylib.GetScreenHeight() / 2 + i * 100, 100, 100);
     obstical[i] = obsticalRefrens;
 }
 
-for (int i = 0; i < 5; i++){
+for (int i = 0; i < 5; i++)
+{
     Rectangle pointsRefrens = new Rectangle(Raylib.GetScreenWidth() / 3, Raylib.GetScreenHeight() / 2 + i * 40, 20, 20);
     points[i] = pointsRefrens;
     T1.picktUpR4[i] = false;
@@ -52,7 +59,8 @@ while (!Raylib.WindowShouldClose())
     T1.witchRect = Toolbox.Poswitch(T1.witchRect, border, T1);
 
     //sjuta 
-    T1 = Toolbox.BuletMove(T1);
+    // T1 = Toolbox.BuletMove(T1);
+    Toolbox.UpdateBullets();
 
     //Collison 
     T1 = Toolbox.Hitboxes(T1.witchRect, r2, r3, points, T1, obstical);
@@ -60,7 +68,9 @@ while (!Raylib.WindowShouldClose())
     //konventerar från float till int (texturer behöver ints)
     int x = (int)T1.witchRect.x;
     int y = (int)T1.witchRect.y;
-    
+
+    p1.Update();
+
     //ritar saker
     Raylib.BeginDrawing();
 
@@ -71,6 +81,7 @@ while (!Raylib.WindowShouldClose())
     Raylib.DrawText(T1.pointsS, 100, 50, 20, Color.ORANGE);
 
     Raylib.DrawTexture(witchTexture, x, y, Color.WHITE);
+    Toolbox.DrawBullets();
 
     Raylib.EndDrawing();
 }

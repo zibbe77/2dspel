@@ -11,12 +11,37 @@ public class Traking
     public bool[] witchCheckX = { false, false };
     public bool[] witchCheckY = { false, false };
     public Rectangle witchRect = new Rectangle();
-    public int[,] buletPos = new int[100, 100];
+    public List<Vector2> bulletPos = new List<Vector2>();
+    public static List<Bullet> bullets = new List<Bullet>();
     public bool[,] buletDirection = new bool[100, 4];
     public int buletNum = 0;
 }
 public class Toolbox
 {
+    public static void FireBullet(Vector2 position, Vector2 direction)
+    {
+        Bullet b = new Bullet();
+        b.direction = direction;
+        b.position = position;
+        Traking.bullets.Add(b);
+    }
+
+    public static void UpdateBullets()
+    {
+        foreach (Bullet b in Traking.bullets)
+        {
+            b.Update();
+        }
+    }
+
+    public static void DrawBullets()
+    {
+        foreach (Bullet b in Traking.bullets)
+        {
+            b.Draw();
+        }
+    }
+
     public static Rectangle Poswitch(Rectangle witchRect, Rectangle border, Traking T1)
     {
         // Vector2 v = new Vector2(30, 70);
@@ -135,28 +160,29 @@ public class Toolbox
                 if (T1.witchCheckX[1] == true) { T1.witchRect.x--; }
                 if (T1.witchCheckY[0] == true) { T1.witchRect.y++; }
                 if (T1.witchCheckY[1] == true) { T1.witchRect.y--; }
-                System.Console.WriteLine("möts");
             }
         }
-        for (int i = 0; i < 100; i++)
-        {
-            Raylib.DrawRectangleRec(T1.buletPos, Color.RED);
-        }
+        // for (int i = 0; i < 100; i++)
+        // {
+        //     Raylib.DrawRectangleRec(T1.buletPos[1, 1], Color.RED);
+        // }
+
+
 
 
 
         return T1;
     }
-    public int bulet(Traking T1)
-    {
-        for (int i = 0; i < 100; i++)
-        {
-            if (T1.buletDirection[i, 0] == true) {T1.buletPos[100, 100]++; }
-            if (T1.buletDirection[i, 1] == true) { }
-            if (T1.buletDirection[i, 2] == true) { }
-            if (T1.buletDirection[i, 3] == true) { }
-        }
+    // public int bulet(Traking T1)
+    // {
+    //     for (int i = 0; i < 100; i++)
+    //     {
+    //         if (T1.buletDirection[i, 0] == true) { T1.buletPos[100, 100]++; }
+    //         if (T1.buletDirection[i, 1] == true) { }
+    //         if (T1.buletDirection[i, 2] == true) { }
+    //         if (T1.buletDirection[i, 3] == true) { }
+    //     }
 
-        return 0;
-    }
+    //     return 0;
+    // }
 }
