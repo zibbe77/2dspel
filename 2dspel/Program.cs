@@ -40,13 +40,16 @@ grid = Mapbox.Mapcreat(mapSize);
 
 int[] lostSpace = new int[2];
 lostSpace = Mapbox.SideBox(mapSize, border);
+obstical = Mapbox.MapPlace(lostSpace, grid, mapSize);
 
 //ger värden på flera obijekt 
-for (int i = 0; i < 5; i++)
+
+/*for (int i = 0; i < 5; i++)
 {
     Rectangle obsticalRefrens = new Rectangle(Raylib.GetScreenWidth() / 4, Raylib.GetScreenHeight() / 2 + i * 100, 100, 100);
     obstical[i] = obsticalRefrens;
 }
+*/
 
 for (int i = 0; i < 5; i++)
 {

@@ -113,7 +113,7 @@ public class Toolbox
                 T1.picktUpR4[i] = true;
             }
         }
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < Mapbox.blocks; i++)
         {
             Raylib.DrawRectangleRec(obstical[i], Color.BLACK);
             bool areOverlapping3 = Raylib.CheckCollisionRecs(r1, obstical[i]);

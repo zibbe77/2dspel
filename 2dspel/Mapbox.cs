@@ -8,11 +8,11 @@ public class Mapbox
     public static int[,] Mapcreat(int[] mapSize)
     {
         Random generator = new Random();
-        int[,] grid = new int[mapSize[0], mapSize[1]];
+        int[,] grid = new int[mapSize[0] / 100, mapSize[1] / 100];
 
-        for (int i = 0; i > mapSize[0]; i++)
+        for (int i = 0; i < mapSize[0]; i++)
         {
-            for (int ii = 0; i > mapSize[1]; ii++)
+            for (int ii = 0; i < mapSize[1]; ii++)
             {
                 int r = generator.Next(0, 1);
                 r = grid[i, ii];
@@ -32,7 +32,7 @@ public class Mapbox
 
         return lostSpace;
     }
-    public static void MapPlace(int[] lostSpace, int[,] grid, int[] mapSize)
+    public static Rectangle[] MapPlace(int[] lostSpace, int[,] grid, int[] mapSize)
     {
         Rectangle[] obstical = new Rectangle[blocks];
         for (int i = 0; i > mapSize[0]; i++)
@@ -43,5 +43,6 @@ public class Mapbox
                 obstical[i] = obsticalRefrens;
             }
         }
+        return obstical;
     }
 }
