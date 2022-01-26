@@ -5,10 +5,8 @@ using System.Numerics;
 Raylib.InitWindow(Raylib.GetScreenWidth(), Raylib.GetScreenHeight(), "Hello World");
 Raylib.SetTargetFPS(60);
 
-
+//skapar en spelar
 Player p1 = new Player();
-p1.position.X = 400;
-p1.position.Y = 400;
 
 //witch varjablar
 float[] witchpos = new float[2];
@@ -16,6 +14,7 @@ Texture2D witchTexture = Raylib.LoadTexture(@"witch3.png");
 witchTexture.height = 80;
 witchTexture.width = 80;
 
+//skapar massa varjablar
 Traking T1 = new Traking();
 
 //bestämer att en av t1 varjablar är lika med en annan recktangel
@@ -36,6 +35,11 @@ int[] mapSize = new int[2];
 //konverterar double till int
 mapSize[0] = Convert.ToInt32(floor);
 mapSize[1] = Convert.ToInt32(floor1);
+int[,] grid = new int[mapSize[0], mapSize[1]];
+grid = Mapbox.Mapcreat(mapSize);
+
+int[] lostSpace = new int[2];
+lostSpace = Mapbox.SideBox(mapSize, border);
 
 //ger värden på flera obijekt 
 for (int i = 0; i < 5; i++)
@@ -59,7 +63,6 @@ while (!Raylib.WindowShouldClose())
     T1.witchRect = Toolbox.Poswitch(T1.witchRect, border, T1);
 
     //sjuta 
-    // T1 = Toolbox.BuletMove(T1);
     Toolbox.UpdateBullets();
 
     //Collison 
