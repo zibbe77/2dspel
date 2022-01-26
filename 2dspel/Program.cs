@@ -2,8 +2,13 @@
 using System;
 using Raylib_cs;
 using System.Numerics;
+using System.Media;
+
 Raylib.InitWindow(Raylib.GetScreenWidth(), Raylib.GetScreenHeight(), "Hello World");
 Raylib.SetTargetFPS(60);
+
+SoundPlayer player = new SoundPlayer(@"Harvest Dawn.wav");
+player.Play();
 
 //skapar en spelar
 Player p1 = new Player();
