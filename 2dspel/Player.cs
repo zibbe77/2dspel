@@ -9,28 +9,44 @@ public class Player
     public void Update()
     {
         // Köra spelarens förflyttningskod etc
+        if (Bullet.reloadtimer == 0)
+        {
+            Vector2 bulletDirection = new Vector2();
+            if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT))
+            {
+                bulletDirection.X = -1;
+                Bullet.reloadtimerbool = true;
+            }
+            if (Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT))
+            {
+                bulletDirection.X = 1;
+                Bullet.reloadtimerbool = true;
+            }
+            if (Raylib.IsKeyDown(KeyboardKey.KEY_DOWN))
+            {
+                bulletDirection.Y = 1;
+                Bullet.reloadtimerbool = true;
 
-        Vector2 bulletDirection = new Vector2();
-        if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT))
-        {
-            bulletDirection.X = -1;
-        }
-        if (Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT))
-        {
-            bulletDirection.X = 1;
-        }
-        if (Raylib.IsKeyDown(KeyboardKey.KEY_DOWN))
-        {
-            bulletDirection.Y = 1;
-        }
-        if (Raylib.IsKeyDown(KeyboardKey.KEY_UP))
-        {
-            bulletDirection.Y = -1;
-        }
+            }
+            if (Raylib.IsKeyDown(KeyboardKey.KEY_UP))
+            {
+                bulletDirection.Y = -1;
+                Bullet.reloadtimerbool = true;
+            }
 
-        if (bulletDirection.Length() > 0)
+            if (bulletDirection.Length() > 0)
+            {
+                Toolbox.FireBullet(position, Vector2.Normalize(bulletDirection));
+            }
+        }
+        if (Bullet.reloadtimerbool == true)
         {
-            Toolbox.FireBullet(position, Vector2.Normalize(bulletDirection));
+            Bullet.reloadtimer++;
+            if (Bullet.reloadtimer == 60)
+            {
+                Bullet.reloadtimerbool = false;
+                Bullet.reloadtimer = 0;
+            }
         }
     }
 

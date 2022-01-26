@@ -68,7 +68,8 @@ while (!Raylib.WindowShouldClose())
     //konventerar från float till int (texturer behöver ints)
     int x = (int)T1.witchRect.x;
     int y = (int)T1.witchRect.y;
-
+    p1.position.X = T1.witchRect.x + 35;
+    p1.position.Y = T1.witchRect.y + 35;
     p1.Update();
 
     //ritar saker
