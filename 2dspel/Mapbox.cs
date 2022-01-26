@@ -4,6 +4,7 @@ using System.Numerics;
 
 public class Mapbox
 {
+    public static int blocks = 0;
     public static int[,] Mapcreat(int[] mapSize)
     {
         Random generator = new Random();
@@ -15,6 +16,10 @@ public class Mapbox
             {
                 int r = generator.Next(0, 1);
                 r = grid[i, ii];
+                if (grid[i, ii] == 1)
+                {
+                    blocks++;
+                }
             }
         }
         return grid;
@@ -29,7 +34,7 @@ public class Mapbox
     }
     public static void MapPlace(int[] lostSpace, int[,] grid, int[] mapSize)
     {
-        Rectangle[] obstical = new Rectangle[mapSize[0] + mapSize[1]];
+        Rectangle[] obstical = new Rectangle[blocks];
         for (int i = 0; i > mapSize[0]; i++)
         {
             for (int ii = 0; i > mapSize[1]; ii++)
