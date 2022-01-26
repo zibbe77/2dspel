@@ -13,8 +13,8 @@ p1.position.Y = 400;
 //witch varjablar
 float[] witchpos = new float[2];
 Texture2D witchTexture = Raylib.LoadTexture(@"witch3.png");
-witchTexture.height = 200;
-witchTexture.width = 200;
+witchTexture.height = 80;
+witchTexture.width = 80;
 
 Traking T1 = new Traking();
 

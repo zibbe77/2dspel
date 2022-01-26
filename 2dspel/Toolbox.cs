@@ -13,8 +13,6 @@ public class Traking
     public Rectangle witchRect = new Rectangle();
     public List<Vector2> bulletPos = new List<Vector2>();
     public static List<Bullet> bullets = new List<Bullet>();
-    public bool[,] buletDirection = new bool[100, 4];
-    public int buletNum = 0;
 }
 public class Toolbox
 {
@@ -44,7 +42,6 @@ public class Toolbox
 
     public static Rectangle Poswitch(Rectangle witchRect, Rectangle border, Traking T1)
     {
-        // Vector2 v = new Vector2(30, 70);
         for (int i = 0; i < 2; i++)
         {
             T1.witchCheckX[i] = false;
@@ -94,43 +91,10 @@ public class Toolbox
         }
         return witchRect;
     }
-    public static Traking BuletMove(Traking T1)
-    {
-        //bulet
-        bool buletNumBool = false;
 
-        if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT))
-        {
-            T1.buletDirection[T1.buletNum, 0] = true;
-        }
-        if (Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT))
-        {
-            T1.buletDirection[T1.buletNum, 1] = true;
-        }
-        if (Raylib.IsKeyDown(KeyboardKey.KEY_DOWN))
-        {
-            T1.buletDirection[T1.buletNum, 2] = true;
-        }
-        if (Raylib.IsKeyDown(KeyboardKey.KEY_UP))
-        {
-            T1.buletDirection[T1.buletNum, 3] = true;
-        }
-        for (int i = 0; i > 4; i++)
-        {
-            if (T1.buletDirection[T1.buletNum, i] == false)
-            {
-                buletNumBool = true;
-            }
-        }
-        if (buletNumBool == true)
-        {
-            T1.buletNum++;
-        }
-        return T1;
-    }
     public static Traking Hitboxes(Rectangle r1, Rectangle r2, Rectangle r3, Rectangle[] points, Traking T1, Rectangle[] obstical)
     {
-        bool areOverlapping = Raylib.CheckCollisionRecs(r1, r2); // true
+        bool areOverlapping = Raylib.CheckCollisionRecs(r1, r2); 
         if (areOverlapping == true)
         {
             Raylib.DrawRectangleRec(r3, Color.RED);
@@ -162,27 +126,6 @@ public class Toolbox
                 if (T1.witchCheckY[1] == true) { T1.witchRect.y--; }
             }
         }
-        // for (int i = 0; i < 100; i++)
-        // {
-        //     Raylib.DrawRectangleRec(T1.buletPos[1, 1], Color.RED);
-        // }
-
-
-
-
-
         return T1;
     }
-    // public int bulet(Traking T1)
-    // {
-    //     for (int i = 0; i < 100; i++)
-    //     {
-    //         if (T1.buletDirection[i, 0] == true) { T1.buletPos[100, 100]++; }
-    //         if (T1.buletDirection[i, 1] == true) { }
-    //         if (T1.buletDirection[i, 2] == true) { }
-    //         if (T1.buletDirection[i, 3] == true) { }
-    //     }
-
-    //     return 0;
-    // }
 }
