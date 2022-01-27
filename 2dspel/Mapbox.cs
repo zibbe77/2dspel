@@ -11,11 +11,11 @@ public class Mapbox
         Random generator = new Random();
         int[,] grid = new int[mapSize[0] / 100, mapSize[1] / 100];
 
-        for (int i = 0; i < mapSize[0]; i++)
+        for (int i = 0; i < mapSize[0] / 100; i++)
         {
-            for (int ii = 0; i < mapSize[1]; ii++)
+            for (int ii = 0; ii < mapSize[1] / 100; ii++)
             {
-                int r = generator.Next(0, 1);
+                int r = generator.Next(0, 2);
                 r = grid[i, ii];
                 if (grid[i, ii] == 1)
                 {
