@@ -4,7 +4,7 @@ using System.Numerics;
 
 public class Mapbox
 {
-    
+
     public static int blocks = 0;
     public static int[,] Mapcreat(int[] mapSize)
     {
@@ -16,7 +16,7 @@ public class Mapbox
             for (int ii = 0; ii < mapSize[1] / 100; ii++)
             {
                 int r = generator.Next(0, 2);
-                r = grid[i, ii];
+                grid[i, ii] = r;
                 if (grid[i, ii] == 1)
                 {
                     blocks++;
@@ -26,7 +26,7 @@ public class Mapbox
         return grid;
 
     }
-    
+
     public static int[] SideBox(int[] mapSize, Rectangle border)
     {
         int[] lostSpace = new int[2];
@@ -38,12 +38,16 @@ public class Mapbox
     public static Rectangle[] MapPlace(int[] lostSpace, int[,] grid, int[] mapSize)
     {
         Rectangle[] obstical = new Rectangle[blocks];
-        for (int i = 0; i > mapSize[0]; i++)
+
+        for (int y = 0; y < grid.GetLength(0); y++)
         {
-            for (int ii = 0; i > mapSize[1]; ii++)
+            for (int x = 0; x < grid.GetLength(1); x++)
             {
-                Rectangle obsticalRefrens = new Rectangle(lostSpace[0] / 2 + ii * 100, lostSpace[0] / 2 + i * 100, 100, 100);
-                obstical[i] = obsticalRefrens;
+                if (grid[y, x] == 1)
+                {
+                    Rectangle obsticalRefrens = new Rectangle(lostSpace[0] / 2 + x * 100, lostSpace[1] / 2 + y * 100, 100, 100);
+                    obstical[x] = obsticalRefrens;
+                }
             }
         }
         return obstical;
