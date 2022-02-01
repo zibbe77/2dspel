@@ -45,7 +45,7 @@ public class Mapbox
             {
                 if (grid[y, x] == 1)
                 {
-                    Rectangle obsticalRefrens = new Rectangle(lostSpace[0] / 2 + x * 100, lostSpace[1] / 2 + y * 100, 100, 100);
+                    Rectangle obsticalRefrens = new Rectangle(x * 100, y * 100, 100, 100);
                     obstical[x] = obsticalRefrens;
                 }
             }
