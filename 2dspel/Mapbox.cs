@@ -38,6 +38,7 @@ public class Mapbox
     public static Rectangle[] MapPlace(int[] lostSpace, int[,] grid, int[] mapSize)
     {
         Rectangle[] obstical = new Rectangle[blocks];
+        int i = 0;
 
         for (int y = 0; y < grid.GetLength(0); y++)
         {
@@ -46,7 +47,8 @@ public class Mapbox
                 if (grid[y, x] == 1)
                 {
                     Rectangle obsticalRefrens = new Rectangle(x * 100, y * 100, 100, 100);
-                    obstical[x] = obsticalRefrens;
+                    obstical[i] = obsticalRefrens;
+                    i++;
                 }
             }
         }
