@@ -8,9 +8,28 @@ public class Bullet
     public float speed = 5;
     public static float reloadtimer = 0;
     public static bool reloadtimerbool = false;
+    public bool isAlive = true;
+
     public void Update()
     {
         position += direction * speed;
+
+        if (position.X > Raylib.GetScreenWidth())
+        {
+            isAlive = false;
+        }
+        if (position.X < 0)
+        {
+            isAlive = false;
+        }
+        if (position.Y > Raylib.GetScreenHeight())
+        {
+            isAlive = false;
+        }
+        if (position.Y < 0)
+        {
+            isAlive = false;
+        }
     }
     public void Draw()
     {

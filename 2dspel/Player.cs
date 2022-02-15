@@ -5,7 +5,6 @@ using Raylib_cs;
 public class Player
 {
     public Vector2 position = new Vector2();
-
     public void Update()
     {
         // Köra spelarens förflyttningskod etc

@@ -4,7 +4,6 @@ using System.Numerics;
 
 public class Mapbox
 {
-
     public static int blocks = 0;
     public static int[,] Mapcreat(int[] mapSize)
     {
@@ -31,11 +30,8 @@ public class Mapbox
                 }
             }
         }
-
-
-
+        grid[0, 0] = 0;
         return grid;
-
     }
 
     public static int[] SideBox(int[] mapSize, Rectangle border)
@@ -64,5 +60,9 @@ public class Mapbox
             }
         }
         return obstical;
+    }
+
+    public static void MapBorderCreat(){
+        Rectangle()
     }
 }

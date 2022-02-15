@@ -11,7 +11,7 @@ public class Traking
     public bool[] witchCheckX = { false, false };
     public bool[] witchCheckY = { false, false };
     public Rectangle witchRect = new Rectangle();
-    public List<Vector2> bulletPos = new List<Vector2>();
+    // public List<Vector2> bulletPos = new List<Vector2>();
     public static List<Bullet> bullets = new List<Bullet>();
 }
 public class Toolbox
@@ -30,6 +30,7 @@ public class Toolbox
         {
             b.Update();
         }
+        Traking.bullets.RemoveAll(b => b.isAlive == false);
     }
 
     public static void DrawBullets()
@@ -40,7 +41,7 @@ public class Toolbox
         }
     }
 
-    public static Rectangle Poswitch(Rectangle witchRect, Rectangle border, Traking T1)
+    public static Rectangle Poswitch(Rectangle witchRect, Rectangle border, Traking T1, int[] lostSpace)
     {
         for (int i = 0; i < 2; i++)
         {
@@ -69,22 +70,22 @@ public class Toolbox
         }
 
         //förhindrar att gå utan för kartan
-        if (witchRect.x < border.x)
+        if (witchRect.x < border.x + lostSpace[0] / 2)
         {
             witchRect.x++;
             T1.witchCheckX[1] = false;
         }
-        if (witchRect.x > border.width - witchRect.width)
+        if (witchRect.x > border.width - witchRect.width - lostSpace[0] / 2)
         {
             witchRect.x--;
             T1.witchCheckX[0] = false;
         }
-        if (witchRect.y < border.y)
+        if (witchRect.y < border.y + lostSpace[1] / 2)
         {
             witchRect.y++;
             T1.witchCheckY[1] = false;
         }
-        if (witchRect.y > border.height - witchRect.height)
+        if (witchRect.y > border.height - witchRect.height - lostSpace[1] / 2)
         {
             witchRect.y--;
             T1.witchCheckY[0] = false;
@@ -93,7 +94,7 @@ public class Toolbox
     }
     public static Traking Hitboxes(Rectangle r1, Rectangle r2, Rectangle r3, Rectangle[] points, Traking T1, Rectangle[] obstical)
     {
-        bool areOverlapping = Raylib.CheckCollisionRecs(r1, r2); 
+        bool areOverlapping = Raylib.CheckCollisionRecs(r1, r2);
         if (areOverlapping == true)
         {
             Raylib.DrawRectangleRec(r3, Color.RED);

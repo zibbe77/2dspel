@@ -24,7 +24,7 @@ witchTexture.width = 80;
 Traking T1 = new Traking();
 
 //bestämer att en av t1 varjablar är lika med en annan recktangel
-Rectangle witchRect1 = new Rectangle(1000, 1000, witchTexture.width, witchTexture.height);
+Rectangle witchRect1 = new Rectangle(0, -50, witchTexture.width, witchTexture.height);
 T1.witchRect = witchRect1;
 
 Rectangle r2 = new Rectangle(Raylib.GetScreenWidth() / 2, Raylib.GetScreenHeight() / 2, 100, 100);
@@ -50,15 +50,6 @@ int[] lostSpace = new int[2];
 lostSpace = Mapbox.SideBox(mapSize, border);
 obstical = Mapbox.MapPlace(lostSpace, grid, mapSize);
 
-//ger värden på flera obijekt 
-
-/*for (int i = 0; i < 5; i++)
-{
-    Rectangle obsticalRefrens = new Rectangle(Raylib.GetScreenWidth() / 4, Raylib.GetScreenHeight() / 2 + i * 100, 100, 100);
-    obstical[i] = obsticalRefrens;
-}
-*/
-
 for (int i = 0; i < 5; i++)
 {
     Rectangle pointsRefrens = new Rectangle(Raylib.GetScreenWidth() / 3, Raylib.GetScreenHeight() / 2 + i * 40, 20, 20);
@@ -71,7 +62,7 @@ Font f1 = Raylib.LoadFont(@"Metrophobic.ttf");
 while (!Raylib.WindowShouldClose())
 {
     // rörelse
-    T1.witchRect = Toolbox.Poswitch(T1.witchRect, border, T1);
+    T1.witchRect = Toolbox.Poswitch(T1.witchRect, border, T1, lostSpace);
 
     //sjuta 
     Toolbox.UpdateBullets();
