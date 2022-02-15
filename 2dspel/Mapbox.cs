@@ -11,9 +11,9 @@ public class Mapbox
         Random generator = new Random();
         int[,] grid = new int[mapSize[0] / 100, mapSize[1] / 100];
 
-        for (int i = 0; i < mapSize[0] / 100; i++)
+        for (int i = 0; i < grid.GetLength(0); i++)
         {
-            for (int ii = 0; ii < mapSize[1] / 100; ii++)
+            for (int ii = 0; ii < grid.GetLength(1); ii++)
             {
                 int r = generator.Next(0, 2);
                 grid[i, ii] = r;
@@ -40,11 +40,11 @@ public class Mapbox
         Rectangle[] obstical = new Rectangle[blocks];
         int i = 0;
 
-        for (int y = 0; y < grid.GetLength(0); y++)
+        for (int x = 0; x < grid.GetLength(0); x++)
         {
-            for (int x = 0; x < grid.GetLength(1); x++)
+            for (int y = 0; y < grid.GetLength(1); y++)
             {
-                if (grid[y, x] == 1)
+                if (grid[x, y] == 1)
                 {
                     Rectangle obsticalRefrens = new Rectangle(x * 100, y * 100, 100, 100);
                     obstical[i] = obsticalRefrens;
