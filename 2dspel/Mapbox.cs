@@ -15,14 +15,25 @@ public class Mapbox
         {
             for (int ii = 0; ii < grid.GetLength(1); ii++)
             {
-                int r = generator.Next(0, 2);
-                grid[i, ii] = r;
+                int r = generator.Next(0, 3);
+                switch (r)
+                {
+                    case 1:
+                        grid[i, ii] = r;
+                        break;
+                    default:
+                        grid[i, ii] = 0;
+                        break;
+                }
                 if (grid[i, ii] == 1)
                 {
                     blocks++;
                 }
             }
         }
+
+
+
         return grid;
 
     }
@@ -46,7 +57,7 @@ public class Mapbox
             {
                 if (grid[x, y] == 1)
                 {
-                    Rectangle obsticalRefrens = new Rectangle(x * 100, y * 100, 100, 100);
+                    Rectangle obsticalRefrens = new Rectangle(x * 100 + lostSpace[0] / 2, y * 100 + lostSpace[1] / 2, 100, 100);
                     obstical[i] = obsticalRefrens;
                     i++;
                 }

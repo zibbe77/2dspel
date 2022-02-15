@@ -42,6 +42,8 @@ int[] mapSize = new int[2];
 mapSize[0] = Convert.ToInt32(floor);
 mapSize[1] = Convert.ToInt32(floor1);
 int[,] grid = new int[mapSize[0], mapSize[1]];
+
+//skappare mappen 
 grid = Mapbox.Mapcreat(mapSize);
 
 int[] lostSpace = new int[2];

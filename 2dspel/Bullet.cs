@@ -12,7 +12,6 @@ public class Bullet
     {
         position += direction * speed;
     }
-
     public void Draw()
     {
         Raylib.DrawRectangle((int)position.X, (int)position.Y, 20, 20, Color.RED);
