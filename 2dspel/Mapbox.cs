@@ -62,7 +62,8 @@ public class Mapbox
         return obstical;
     }
 
-    public static void MapBorderCreat(){
-        Rectangle()
+    public static void MapBorderCreat(int[] lostSpace)
+    {
+        Rectangle border1 = new Rectangle(0, 0, Raylib.GetScreenWidth, lostSpace[0] / 2);
     }
 }
