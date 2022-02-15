@@ -49,6 +49,8 @@ grid = Mapbox.Mapcreat(mapSize);
 int[] lostSpace = new int[2];
 lostSpace = Mapbox.SideBox(mapSize, border);
 obstical = Mapbox.MapPlace(lostSpace, grid, mapSize);
+Rectangle[] borderC = Mapbox.MapBorderCreat(lostSpace); 
+
 
 for (int i = 0; i < 5; i++)
 {
@@ -79,6 +81,8 @@ while (!Raylib.WindowShouldClose())
 
     //ritar saker
     Raylib.BeginDrawing();
+
+    Mapbox.MapBorderDraw(borderC);
 
     Raylib.ClearBackground(Color.WHITE);
     Raylib.DrawRectangleRec(T1.witchRect, Color.SKYBLUE);
