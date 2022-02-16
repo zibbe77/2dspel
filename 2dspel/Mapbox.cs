@@ -64,22 +64,21 @@ public class Mapbox
 
     public static Rectangle[] MapBorderCreat(int[] lostSpace)
     {
-        Rectangle border1 = new Rectangle(0, 0, Raylib.GetScreenWidth(), lostSpace[1] / 2);
-        Rectangle border2 = new Rectangle(0, 0, lostSpace[0] / 2, Raylib.GetScreenHeight());
-        Rectangle border3 = new Rectangle(Raylib.GetScreenWidth(), Raylib.GetScreenHeight(),Raylib.GetScreenWidth(), -lostSpace[1] / 2);
-        Rectangle border4 = new Rectangle(Raylib.GetScreenWidth(), Raylib.GetScreenHeight(),-lostSpace[0] / 2, Raylib.GetScreenHeight());
-        
-        Rectangle[] borderC = new Rectangle[4];
-        borderC[0] = border1;
-        borderC[1] = border2;
-        borderC[2] = border3;
-        borderC[3] = border4;
-        
+
+        Rectangle[] borderC = new Rectangle[4]
+        {
+        new Rectangle(0, 0, Raylib.GetScreenWidth(), lostSpace[1] / 2),
+        new Rectangle(0, 0, lostSpace[0] / 2, Raylib.GetScreenHeight()),
+        new Rectangle(Raylib.GetScreenWidth(), Raylib.GetScreenHeight(), -Raylib.GetScreenWidth(), -lostSpace[1] / 2),
+        new Rectangle(Raylib.GetScreenWidth(), Raylib.GetScreenHeight(), -lostSpace[0]/ 2, -Raylib.GetScreenHeight())
+        };
         return borderC;
     }
-    public static void MapBorderDraw(Rectangle[] borderC){
+    public static void MapBorderDraw(Rectangle[] borderC)
+    {
 
-        for(int i = 0; i < 3; i++){
+        for (int i = 0; i < 4; i++)
+        {
             Raylib.DrawRectangleRec(borderC[i], Color.BLACK);
         }
     }
