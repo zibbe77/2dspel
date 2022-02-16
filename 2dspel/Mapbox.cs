@@ -5,7 +5,10 @@ using System.Numerics;
 public class Mapbox
 {
     public static int blocks = 0;
-    public static int[,] Mapcreat(int[] mapSize)
+
+
+
+    public static int[,] MapCreat(int[] mapSize)
     {
         Random generator = new Random();
         int[,] grid = new int[mapSize[0] / 100, mapSize[1] / 100];
@@ -32,6 +35,17 @@ public class Mapbox
         }
         grid[0, 0] = 0;
         return grid;
+    }
+
+    public static bool MapControl(int[,] grid)
+    {
+        bool mapOkej = false;
+
+        grid.GetLength(0);
+        grid.GetLength(1);
+
+
+        return mapOkej;
     }
 
     public static int[] SideBox(int[] mapSize, Rectangle border)

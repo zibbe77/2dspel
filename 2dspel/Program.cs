@@ -44,12 +44,12 @@ mapSize[1] = Convert.ToInt32(floor1);
 int[,] grid = new int[mapSize[0], mapSize[1]];
 
 //skappare mappen 
-grid = Mapbox.Mapcreat(mapSize);
+grid = Mapbox.MapCreat(mapSize);
 
 int[] lostSpace = new int[2];
 lostSpace = Mapbox.SideBox(mapSize, border);
 obstical = Mapbox.MapPlace(lostSpace, grid, mapSize);
-Rectangle[] borderC = Mapbox.MapBorderCreat(lostSpace); 
+Rectangle[] borderC = Mapbox.MapBorderCreat(lostSpace);
 
 
 for (int i = 0; i < 5; i++)
