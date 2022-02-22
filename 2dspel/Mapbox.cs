@@ -1,6 +1,8 @@
 using System;
 using Raylib_cs;
 using System.Numerics;
+using System.Collections.Generic;
+
 
 public class Mapbox
 {
@@ -40,6 +42,23 @@ public class Mapbox
     public static bool MapControl(int[,] grid)
     {
         bool mapOkej = false;
+
+
+
+        List<int[,]> Que = new List<int[,]>();
+        List<(int, int)> SAMMES = new List<(int, int)>();
+
+        Que.Add(grid);
+
+        if (Que[0][0, 0] == 0)
+        {}
+
+
+
+        while (mapOkej == false)
+        {
+
+        }
 
         grid.GetLength(0);
         grid.GetLength(1);
