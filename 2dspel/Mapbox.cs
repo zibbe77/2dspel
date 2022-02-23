@@ -44,20 +44,34 @@ public class Mapbox
         bool mapOkej = false;
 
 
-
-        List<int[,]> Que = new List<int[,]>();
-        List<(int, int)> SAMMES = new List<(int, int)>();
-
-        Que.Add(grid);
-
-        if (Que[0][0, 0] == 0)
-        {}
+        List<(int x, int y)> Que = new List<(int, int)>();
 
 
+        Que.Add((0, 0));
 
+        int[] gridP = new int[2];
         while (mapOkej == false)
         {
+            gridP[0] = Que.x[0];
 
+
+            if (grid[gridP[0] + 1, gridP[0]] == 0)
+            {
+                Que.Add((gridP[0] + 1, gridP[0]));
+            }
+            if (grid[gridP[0] - 1, gridP[0]] == 0)
+            {
+                Que.Add((gridP[0] - 1, gridP[0]));
+            }
+
+            if (grid[gridP[0], gridP[0] + 1] == 0)
+            {
+                Que.Add((gridP[0], gridP[0] + 1));
+            }
+            if (grid[gridP[0], gridP[0] - 1] == 0)
+            {
+                Que.Add((gridP[0], gridP[0] - 1));
+            }
         }
 
         grid.GetLength(0);
