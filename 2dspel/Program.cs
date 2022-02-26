@@ -51,6 +51,8 @@ lostSpace = Mapbox.SideBox(mapSize, border);
 obstical = Mapbox.MapPlace(lostSpace, grid, mapSize);
 Rectangle[] borderC = Mapbox.MapBorderCreat(lostSpace);
 
+bool mapOkej = Mapbox.MapControl(grid);
+
 
 for (int i = 0; i < 5; i++)
 {
