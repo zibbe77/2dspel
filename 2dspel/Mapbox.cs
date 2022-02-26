@@ -42,25 +42,48 @@ public class Mapbox
     public static bool MapControl(int[,] grid)
     {
         bool mapOkej = false;
+        int blockCount = 0;
         List<(int x, int y)> Que = new List<(int, int)>();
-        (int x, int y)[] gridP = new (int, int)[2];
+
+        (int x, int y) gridP = (0, 0);
 
         Que.Add((0, 0));
-        
-        while (mapOkej = false)
+
+        while (mapOkej == false)
         {
-            if (grid[gridP.x[0]+ 1, gridP.y[0]] == 0)
+            gridP = Que[0];
+            try
             {
-                Que.Add((gridP[0] + 1, gridP[0]));
-                System.Console.WriteLine("1");
+                if (grid[gridP.x + 1, gridP.y] == 0)
+                {
+                    Que.Add((gridP.x + 1, gridP.y));
+                    blockCount++;
+                }
             }
-            System.Console.WriteLine("2");
+            catch 
+            {
+                Console.WriteLine("utanför");
+            }
+            try
+            {
+                if (grid[gridP.x, gridP.y + 1] == 0)
+                {
+                    Que.Add((gridP.x, gridP.y + 1));
+                    blockCount++;
+                }
+            }
+            catch 
+            {
+                Console.WriteLine("Utanför");
+            }
+        
+           Que.RemoveAt(0);
+
+            if(Que.Count == 0){
+                System.Console.WriteLine($"{blockCount} antal block");
+                mapOkej = true;
+            }
         }
-
-        grid.GetLength(0);
-        grid.GetLength(1);
-
-
         return mapOkej;
     }
 
