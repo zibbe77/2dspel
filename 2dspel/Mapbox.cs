@@ -9,6 +9,7 @@ public class Mapbox
     public static int blocks = 0;
 
     public static int trysMap = 0;
+    public static Rectangle[] obstical = new Rectangle[4];
 
     public static int[,] MapCreat(int[] mapSize)
     {
@@ -40,7 +41,7 @@ public class Mapbox
     }
 
     public static bool MapControl(int[,] grid, int[] mapSize)
-    {   
+    {
         bool test = false;
         bool mapOkej = false;
         int blockCount = 0;
@@ -61,10 +62,7 @@ public class Mapbox
                     blockCount++;
                 }
             }
-            catch 
-            {
-                Console.WriteLine("utanför");
-            }
+            catch { }
             try
             {
                 if (grid[gridP.x, gridP.y + 1] == 0)
@@ -74,10 +72,7 @@ public class Mapbox
                     blockCount++;
                 }
             }
-            catch 
-            {
-                Console.WriteLine("Utanför");
-            }
+            catch { }
             try
             {
                 if (grid[gridP.x - 1, gridP.y] == 0)
@@ -87,10 +82,7 @@ public class Mapbox
                     blockCount++;
                 }
             }
-            catch 
-            {
-                Console.WriteLine("utanför");
-            }
+            catch { }
             try
             {
                 if (grid[gridP.x, gridP.y - 1] == 0)
@@ -100,26 +92,25 @@ public class Mapbox
                     blockCount++;
                 }
             }
-            catch 
-            {
-                Console.WriteLine("Utanför");
-            }
-        
-           Que.RemoveAt(0);
-            
+            catch { }
+            Que.RemoveAt(0);
 
-            if(Que.Count == 0){
+            if (Que.Count == 0)
+            {
                 System.Console.WriteLine($"{blockCount} antal block");
                 int filler = mapSize[0] / 100;
                 filler *= mapSize[1] / 100;
-                
+
                 float fillerTwo = (float)blockCount / (float)filler;
                 System.Console.WriteLine($"{fillerTwo} antal prosent block");
-                
-                if (fillerTwo > 0.7){
+
+                if (fillerTwo > 0.7)
+                {
                     mapOkej = true;
                     System.Console.WriteLine($"antal försk för att göra en map {trysMap}");
-                } else {
+                }
+                else
+                {
                     trysMap++;
                 }
                 test = true;

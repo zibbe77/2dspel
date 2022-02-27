@@ -28,7 +28,6 @@ Rectangle witchRect1 = new Rectangle(0, -50, witchTexture.width, witchTexture.he
 T1.witchRect = witchRect1;
 
 Rectangle[] points = new Rectangle[5];
-Rectangle[] obstical = new Rectangle[4];
 
 //räknar på hur stor kartar ska vara 
 Rectangle border = new Rectangle(0, 0, Raylib.GetScreenWidth(), Raylib.GetScreenHeight());
@@ -41,19 +40,7 @@ mapSize[0] = Convert.ToInt32(floor);
 mapSize[1] = Convert.ToInt32(floor1);
 int[,] grid = new int[mapSize[0], mapSize[1]];
 
-//skappare mappen
-bool mapOkej = false;
-while(mapOkej == false){
-grid = Mapbox.MapCreat(mapSize);
-mapOkej = Mapbox.MapControl(grid, mapSize);
-}
 
-// mapp grafik
-int[] lostSpace = new int[2];
-
-lostSpace = Mapbox.SideBox(mapSize, border);
-Rectangle[] borderC = Mapbox.MapBorderCreat(lostSpace);
-obstical = Mapbox.MapPlace(lostSpace, grid, mapSize);
 
 for (int i = 0; i < 5; i++)
 {
@@ -64,36 +51,66 @@ for (int i = 0; i < 5; i++)
 
 Font f1 = Raylib.LoadFont(@"Metrophobic.ttf");
 
+//för switchen ska fungera
+int gameState = 0;
+// nåra varjablar som behvde ut ur switchen
+Rectangle[] borderC = new Rectangle[4];
+int[] lostSpace = new int[2];
 while (!Raylib.WindowShouldClose())
 {
-    // rörelse
-    T1.witchRect = Toolbox.Poswitch(T1.witchRect, border, T1, lostSpace);
+    switch (gameState)
+    {
+        case 0:
+            bool mapOkej = false;
+            while (mapOkej == false)
+            {
+            Raylib.BeginDrawing();
+            Raylib.ClearBackground(Color.WHITE);
+            Raylib.DrawText("LOADING", 0, Raylib.GetScreenHeight() / 2 - 300, 400, Color.BLACK);
+            Raylib.EndDrawing();
+            //skappare mappen
+           
+                grid = Mapbox.MapCreat(mapSize);
+                mapOkej = Mapbox.MapControl(grid, mapSize);
+            }
+            gameState++;
 
-    //sjuta 
-    Toolbox.UpdateBullets();
+            // mapp grafik
+            lostSpace = Mapbox.SideBox(mapSize, border);
+            borderC = Mapbox.MapBorderCreat(lostSpace);
+            Mapbox.obstical = Mapbox.MapPlace(lostSpace, grid, mapSize);
+            break;
+        case 1:
+            // rörelse
+            T1.witchRect = Toolbox.Poswitch(T1.witchRect, border, T1, lostSpace);
 
-    //Collison 
-    T1 = Toolbox.BlockHitboxPlayer(T1.witchRect, T1, obstical);
-    T1 = Toolbox.PointHitbox(T1.witchRect, points, T1);
+            //sjuta 
+            Toolbox.UpdateBullets();
 
-    //konventerar från float till int (texturer behöver ints)
-    int x = (int)T1.witchRect.x;
-    int y = (int)T1.witchRect.y;
-    p1.position.X = T1.witchRect.x + 35;
-    p1.position.Y = T1.witchRect.y + 35;
-    p1.Update();
+            //Collison 
+            T1 = Toolbox.BlockHitboxPlayer(T1.witchRect, T1, Mapbox.obstical);
+            T1 = Toolbox.PointHitbox(T1.witchRect, points, T1);
 
-    //ritar saker
-    Raylib.BeginDrawing();
+            //konventerar från float till int (texturer behöver ints)
+            int x = (int)T1.witchRect.x;
+            int y = (int)T1.witchRect.y;
+            p1.position.X = T1.witchRect.x + 35;
+            p1.position.Y = T1.witchRect.y + 35;
+            p1.Update();
 
-    Mapbox.MapBorderDraw(borderC);
+            //ritar saker
+            Raylib.BeginDrawing();
 
-    Raylib.ClearBackground(Color.WHITE);
+            Mapbox.MapBorderDraw(borderC);
 
-    Raylib.DrawText(T1.pointsS, 100, 50, 20, Color.ORANGE);
+            Raylib.ClearBackground(Color.WHITE);
 
-    Raylib.DrawTexture(witchTexture, x, y, Color.WHITE);
-    Toolbox.DrawBullets();
+            Raylib.DrawText(T1.pointsS, 100, 50, 20, Color.ORANGE);
 
-    Raylib.EndDrawing();
+            Raylib.DrawTexture(witchTexture, x, y, Color.WHITE);
+            Toolbox.DrawBullets();
+
+            Raylib.EndDrawing();
+            break;
+    }
 }

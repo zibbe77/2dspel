@@ -30,6 +30,15 @@ public class Bullet
         {
             isAlive = false;
         }
+        for (int i = 0; i < Mapbox.blocks; i++)
+        {  
+            Rectangle refrens = new Rectangle((int)position.X,(int)position.Y,20,20);
+            bool areOverlapping = Raylib.CheckCollisionRecs(refrens, Mapbox.obstical[i] );
+            if (areOverlapping == true)
+            {
+                isAlive = false;
+            }
+        }
     }
     public void Draw()
     {
