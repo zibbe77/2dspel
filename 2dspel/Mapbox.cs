@@ -8,7 +8,7 @@ public class Mapbox
 {
     public static int blocks = 0;
 
-
+    public static int trysMap = 0;
 
     public static int[,] MapCreat(int[] mapSize)
     {
@@ -39,23 +39,24 @@ public class Mapbox
         return grid;
     }
 
-    public static bool MapControl(int[,] grid)
-    {
+    public static bool MapControl(int[,] grid, int[] mapSize)
+    {   
+        bool test = false;
         bool mapOkej = false;
         int blockCount = 0;
         List<(int x, int y)> Que = new List<(int, int)>();
 
         (int x, int y) gridP = (0, 0);
-
         Que.Add((0, 0));
 
-        while (mapOkej == false)
+        while (test == false)
         {
             gridP = Que[0];
             try
             {
                 if (grid[gridP.x + 1, gridP.y] == 0)
                 {
+                    grid[gridP.x + 1, gridP.y] = 2;
                     Que.Add((gridP.x + 1, gridP.y));
                     blockCount++;
                 }
@@ -68,7 +69,34 @@ public class Mapbox
             {
                 if (grid[gridP.x, gridP.y + 1] == 0)
                 {
+                    grid[gridP.x, gridP.y + 1] = 2;
                     Que.Add((gridP.x, gridP.y + 1));
+                    blockCount++;
+                }
+            }
+            catch 
+            {
+                Console.WriteLine("Utanför");
+            }
+            try
+            {
+                if (grid[gridP.x - 1, gridP.y] == 0)
+                {
+                    grid[gridP.x - 1, gridP.y] = 2;
+                    Que.Add((gridP.x - 1, gridP.y));
+                    blockCount++;
+                }
+            }
+            catch 
+            {
+                Console.WriteLine("utanför");
+            }
+            try
+            {
+                if (grid[gridP.x, gridP.y - 1] == 0)
+                {
+                    grid[gridP.x, gridP.y - 1] = 2;
+                    Que.Add((gridP.x, gridP.y - 1));
                     blockCount++;
                 }
             }
@@ -78,10 +106,23 @@ public class Mapbox
             }
         
            Que.RemoveAt(0);
+            
 
             if(Que.Count == 0){
                 System.Console.WriteLine($"{blockCount} antal block");
-                mapOkej = true;
+                int filler = mapSize[0] / 100;
+                filler *= mapSize[1] / 100;
+                
+                float fillerTwo = (float)blockCount / (float)filler;
+                System.Console.WriteLine($"{fillerTwo} antal prosent block");
+                
+                if (fillerTwo > 0.7){
+                    mapOkej = true;
+                    System.Console.WriteLine($"antal försk för att göra en map {trysMap}");
+                } else {
+                    trysMap++;
+                }
+                test = true;
             }
         }
         return mapOkej;

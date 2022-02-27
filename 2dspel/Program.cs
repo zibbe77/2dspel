@@ -8,8 +8,8 @@ Raylib.InitWindow(Raylib.GetScreenWidth(), Raylib.GetScreenHeight(), "Hello Worl
 Raylib.SetTargetFPS(60);
 
 //play sound
-SoundPlayer player = new SoundPlayer(@"Harvest Dawn.wav");
-player.Play();
+// SoundPlayer player = new SoundPlayer(@"Harvest Dawn.wav");
+// player.Play();
 
 //skapar en spelar
 Player p1 = new Player();
@@ -27,10 +27,8 @@ Traking T1 = new Traking();
 Rectangle witchRect1 = new Rectangle(0, -50, witchTexture.width, witchTexture.height);
 T1.witchRect = witchRect1;
 
-Rectangle r2 = new Rectangle(Raylib.GetScreenWidth() / 2, Raylib.GetScreenHeight() / 2, 100, 100);
-Rectangle r3 = new Rectangle(0, 0, Raylib.GetScreenWidth(), Raylib.GetScreenHeight());
 Rectangle[] points = new Rectangle[5];
-Rectangle[] obstical = new Rectangle[5];
+Rectangle[] obstical = new Rectangle[4];
 
 //räknar på hur stor kartar ska vara 
 Rectangle border = new Rectangle(0, 0, Raylib.GetScreenWidth(), Raylib.GetScreenHeight());
@@ -43,16 +41,19 @@ mapSize[0] = Convert.ToInt32(floor);
 mapSize[1] = Convert.ToInt32(floor1);
 int[,] grid = new int[mapSize[0], mapSize[1]];
 
-//skappare mappen 
+//skappare mappen
+bool mapOkej = false;
+while(mapOkej == false){
 grid = Mapbox.MapCreat(mapSize);
+mapOkej = Mapbox.MapControl(grid, mapSize);
+}
 
+// mapp grafik
 int[] lostSpace = new int[2];
+
 lostSpace = Mapbox.SideBox(mapSize, border);
-obstical = Mapbox.MapPlace(lostSpace, grid, mapSize);
 Rectangle[] borderC = Mapbox.MapBorderCreat(lostSpace);
-
-bool mapOkej = Mapbox.MapControl(grid);
-
+obstical = Mapbox.MapPlace(lostSpace, grid, mapSize);
 
 for (int i = 0; i < 5; i++)
 {
@@ -72,7 +73,7 @@ while (!Raylib.WindowShouldClose())
     Toolbox.UpdateBullets();
 
     //Collison 
-    T1 = Toolbox.Hitboxes(T1.witchRect, r2, r3, points, T1, obstical);
+    T1 = Toolbox.Hitboxes(T1.witchRect, points, T1, obstical);
 
     //konventerar från float till int (texturer behöver ints)
     int x = (int)T1.witchRect.x;
@@ -87,8 +88,6 @@ while (!Raylib.WindowShouldClose())
     Mapbox.MapBorderDraw(borderC);
 
     Raylib.ClearBackground(Color.WHITE);
-    Raylib.DrawRectangleRec(T1.witchRect, Color.SKYBLUE);
-    Raylib.DrawRectangleRec(r2, Color.RED);
 
     Raylib.DrawText(T1.pointsS, 100, 50, 20, Color.ORANGE);
 
