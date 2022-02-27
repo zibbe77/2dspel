@@ -92,9 +92,25 @@ public class Toolbox
         }
         return witchRect;
     }
-    public static Traking Hitboxes(Rectangle r1, Rectangle[] points, Traking T1, Rectangle[] obstical)
+    public static Traking BlockHitboxPlayer(Rectangle r1, Traking T1, Rectangle[] obstical)
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < Mapbox.blocks; i++)
+        {
+            Raylib.DrawRectangleRec(obstical[i], Color.BLACK);
+            bool areOverlapping3 = Raylib.CheckCollisionRecs(r1, obstical[i]);
+            if (areOverlapping3 == true)
+            {
+                if (T1.witchCheckX[0] == true) { T1.witchRect.x++; }
+                if (T1.witchCheckX[1] == true) { T1.witchRect.x--; }
+                if (T1.witchCheckY[0] == true) { T1.witchRect.y++; }
+                if (T1.witchCheckY[1] == true) { T1.witchRect.y--; }
+            }
+        }
+        return T1;
+    }
+    public static Traking PointHitbox (Rectangle r1, Rectangle[] points, Traking T1){
+
+     for (int i = 0; i < 5; i++)
         {
             bool areOverlapping2 = Raylib.CheckCollisionRecs(r1, points[i]);
             if (T1.picktUpR4[i] == false && areOverlapping2 == false)
@@ -108,18 +124,7 @@ public class Toolbox
                 T1.picktUpR4[i] = true;
             }
         }
-        for (int i = 0; i < Mapbox.blocks; i++)
-        {
-            Raylib.DrawRectangleRec(obstical[i], Color.BLACK);
-            bool areOverlapping3 = Raylib.CheckCollisionRecs(r1, obstical[i]);
-            if (areOverlapping3 == true)
-            {
-                if (T1.witchCheckX[0] == true) { T1.witchRect.x++; }
-                if (T1.witchCheckX[1] == true) { T1.witchRect.x--; }
-                if (T1.witchCheckY[0] == true) { T1.witchRect.y++; }
-                if (T1.witchCheckY[1] == true) { T1.witchRect.y--; }
-            }
-        }
+
         return T1;
     }
 }

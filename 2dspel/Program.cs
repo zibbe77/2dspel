@@ -73,7 +73,8 @@ while (!Raylib.WindowShouldClose())
     Toolbox.UpdateBullets();
 
     //Collison 
-    T1 = Toolbox.Hitboxes(T1.witchRect, points, T1, obstical);
+    T1 = Toolbox.BlockHitboxPlayer(T1.witchRect, T1, obstical);
+    T1 = Toolbox.PointHitbox(T1.witchRect, points, T1);
 
     //konventerar från float till int (texturer behöver ints)
     int x = (int)T1.witchRect.x;
