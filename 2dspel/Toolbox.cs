@@ -10,7 +10,7 @@ public class Traking
     public bool[] picktUpR4 = new bool[5];
     public bool[] witchCheckX = { false, false };
     public bool[] witchCheckY = { false, false };
-    public Rectangle witchRect = new Rectangle();
+    // public Rectangle witchRect = new Rectangle();
     public static List<Bullet> bullets = new List<Bullet>();
     public static List<EnemySimpelRun> enemySimpelRuns = new List<EnemySimpelRun>();
 }
@@ -99,10 +99,10 @@ public class Toolbox
             bool areOverlapping3 = Raylib.CheckCollisionRecs(r1, obstical[i]);
             if (areOverlapping3 == true)
             {
-                if (T1.witchCheckX[0] == true) { T1.witchRect.x++; }
-                if (T1.witchCheckX[1] == true) { T1.witchRect.x--; }
-                if (T1.witchCheckY[0] == true) { T1.witchRect.y++; }
-                if (T1.witchCheckY[1] == true) { T1.witchRect.y--; }
+                if (T1.witchCheckX[0] == true) { Player.witchRect.x++; }
+                if (T1.witchCheckX[1] == true) { Player.witchRect.x--; }
+                if (T1.witchCheckY[0] == true) { Player.witchRect.y++; }
+                if (T1.witchCheckY[1] == true) { Player.witchRect.y--; }
             }
         }
         return T1;

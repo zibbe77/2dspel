@@ -28,8 +28,14 @@ public class EnemySimpelRun
                 }
             }
         }
-
-
+         foreach (EnemySimpelRun E in Traking.enemySimpelRuns)
+            {
+                Rectangle refrensE = new Rectangle((int)E.position.X, (int)E.position.Y, 80, 80);
+                bool areOverlapping = Raylib.CheckCollisionRecs(refrensE, Player.witchRect);
+                if(areOverlapping == true){
+                    Player.isAlive = false;
+                }
+            }
     }
     public void Draw()
     {

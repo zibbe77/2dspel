@@ -15,7 +15,6 @@ Raylib.SetTargetFPS(60);
 Player p1 = new Player();
 
 //witch varjablar
-float[] witchpos = new float[2];
 Texture2D witchTexture = Raylib.LoadTexture(@"witch3.png");
 witchTexture.height = 80;
 witchTexture.width = 80;
@@ -25,7 +24,7 @@ Traking T1 = new Traking();
 
 //bestämer att en av t1 varjablar är lika med en annan recktangel
 Rectangle witchRect1 = new Rectangle(0, -50, witchTexture.width, witchTexture.height);
-T1.witchRect = witchRect1;
+Player.witchRect = witchRect1;
 
 Rectangle[] points = new Rectangle[5];
 
@@ -64,12 +63,12 @@ while (!Raylib.WindowShouldClose())
             bool mapOkej = false;
             while (mapOkej == false)
             {
-            Raylib.BeginDrawing();
-            Raylib.ClearBackground(Color.WHITE);
-            Raylib.DrawText("LOADING", 0, Raylib.GetScreenHeight() / 2 - 300, 400, Color.BLACK);
-            Raylib.EndDrawing();
-            //skappare mappen
-           
+                Raylib.BeginDrawing();
+                Raylib.ClearBackground(Color.WHITE);
+                Raylib.DrawText("LOADING", 100, Raylib.GetScreenHeight() / 2 - 300, 400, Color.BLACK);
+                Raylib.EndDrawing();
+                //skappare mappen
+
                 grid = Mapbox.MapCreat(mapSize);
                 mapOkej = Mapbox.MapControl(grid, mapSize);
             }
@@ -79,26 +78,26 @@ while (!Raylib.WindowShouldClose())
             lostSpace = Mapbox.SideBox(mapSize, border);
             borderC = Mapbox.MapBorderCreat(lostSpace);
             Mapbox.obstical = Mapbox.MapPlace(lostSpace, grid, mapSize);
-            
+
             EnemySimpelRunLogi.EnemySimpelRunSpawn();
             break;
         case 1:
             // rörelse
-            T1.witchRect = Toolbox.Poswitch(T1.witchRect, border, T1, lostSpace);
+            Player.witchRect = Toolbox.Poswitch(Player.witchRect, border, T1, lostSpace);
 
             //sjuta 
             Toolbox.UpdateBullets();
             EnemySimpelRunLogi.EnemySimpelRunUpdate();
 
             //Collison 
-            T1 = Toolbox.BlockHitboxPlayer(T1.witchRect, T1, Mapbox.obstical);
-            T1 = Toolbox.PointHitbox(T1.witchRect, points, T1);
+            T1 = Toolbox.BlockHitboxPlayer(Player.witchRect, T1, Mapbox.obstical);
+            T1 = Toolbox.PointHitbox(Player.witchRect, points, T1);
 
             //konventerar från float till int (texturer behöver ints)
-            int x = (int)T1.witchRect.x;
-            int y = (int)T1.witchRect.y;
-            p1.position.X = T1.witchRect.x + 35;
-            p1.position.Y = T1.witchRect.y + 35;
+            int x = (int)Player.witchRect.x;
+            int y = (int)Player.witchRect.y;
+            p1.position.X = Player.witchRect.x + 35;
+            p1.position.Y = Player.witchRect.y + 35;
             p1.Update();
 
             //ritar saker
@@ -114,6 +113,15 @@ while (!Raylib.WindowShouldClose())
             Raylib.DrawTexture(witchTexture, x, y, Color.WHITE);
             Toolbox.DrawBullets();
 
+            Raylib.EndDrawing();
+
+            //är spealeren i liv
+            gameState = Player.PlayerAlive(gameState);
+            break;
+        case 2:
+            Raylib.BeginDrawing();
+            Raylib.ClearBackground(Color.WHITE);
+            Raylib.DrawText("You Died", 100, Raylib.GetScreenHeight() / 2 - 300, 400, Color.BLACK);
             Raylib.EndDrawing();
             break;
     }

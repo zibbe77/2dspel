@@ -5,6 +5,8 @@ using Raylib_cs;
 public class Player
 {
     public Vector2 position = new Vector2();
+    public static Rectangle witchRect = new Rectangle();
+    public static bool isAlive = true;
     public void Update()
     {
         // Köra spelarens förflyttningskod etc
@@ -48,9 +50,13 @@ public class Player
             }
         }
     }
-
-    public void Draw()
+    public static int PlayerAlive(int gameState)
     {
-        // Rita ut spelaren
+        if (Player.isAlive == false)
+        {
+            gameState++;
+        }
+        return gameState;
     }
 }
+
