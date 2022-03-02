@@ -7,9 +7,9 @@ using System.Collections.Generic;
 public class Mapbox
 {
     public static int blocks = 0;
-
     public static int trysMap = 0;
     public static Rectangle[] obstical = new Rectangle[4];
+    public static List<(int x, int y)> boxes = new List<(int, int)>();
 
     public static int[,] MapCreat(int[] mapSize)
     {
@@ -59,6 +59,7 @@ public class Mapbox
                 {
                     grid[gridP.x + 1, gridP.y] = 2;
                     Que.Add((gridP.x + 1, gridP.y));
+                    Mapbox.boxes.Add((gridP.x + 1, gridP.y));
                     blockCount++;
                 }
             }
@@ -69,6 +70,7 @@ public class Mapbox
                 {
                     grid[gridP.x, gridP.y + 1] = 2;
                     Que.Add((gridP.x, gridP.y + 1));
+                    Mapbox.boxes.Add((gridP.x + 1, gridP.y));
                     blockCount++;
                 }
             }
@@ -79,6 +81,7 @@ public class Mapbox
                 {
                     grid[gridP.x - 1, gridP.y] = 2;
                     Que.Add((gridP.x - 1, gridP.y));
+                    Mapbox.boxes.Add((gridP.x + 1, gridP.y));
                     blockCount++;
                 }
             }
@@ -89,6 +92,7 @@ public class Mapbox
                 {
                     grid[gridP.x, gridP.y - 1] = 2;
                     Que.Add((gridP.x, gridP.y - 1));
+                    Mapbox.boxes.Add((gridP.x + 1, gridP.y));
                     blockCount++;
                 }
             }

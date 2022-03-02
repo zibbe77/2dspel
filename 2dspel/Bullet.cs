@@ -42,6 +42,6 @@ public class Bullet
     }
     public void Draw()
     {
-        Raylib.DrawRectangle((int)position.X, (int)position.Y, 20, 20, Color.RED);
+        Raylib.DrawRectangle((int)position.X, (int)position.Y, 20, 20, Color.GRAY);
     }
 }
