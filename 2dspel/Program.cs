@@ -79,6 +79,8 @@ while (!Raylib.WindowShouldClose())
             lostSpace = Mapbox.SideBox(mapSize, border);
             borderC = Mapbox.MapBorderCreat(lostSpace);
             Mapbox.obstical = Mapbox.MapPlace(lostSpace, grid, mapSize);
+            
+            EnemySimpelRunLogi.EnemySimpelRunSpawn();
             break;
         case 1:
             // rörelse
@@ -86,6 +88,7 @@ while (!Raylib.WindowShouldClose())
 
             //sjuta 
             Toolbox.UpdateBullets();
+            EnemySimpelRunLogi.EnemySimpelRunUpdate();
 
             //Collison 
             T1 = Toolbox.BlockHitboxPlayer(T1.witchRect, T1, Mapbox.obstical);
@@ -102,6 +105,7 @@ while (!Raylib.WindowShouldClose())
             Raylib.BeginDrawing();
 
             Mapbox.MapBorderDraw(borderC);
+            EnemySimpelRunLogi.EnemySimpelRunDraw();
 
             Raylib.ClearBackground(Color.WHITE);
 

@@ -39,8 +39,9 @@ public class EnemySimpelRunLogi
     }
     public static void EnemySimpelRunCreat((int x, int y) position){
         EnemySimpelRun E = new EnemySimpelRun();
-        E.position.X = position.x;  
-        E.position.Y = position.y;
+        E.position.X = position.x * 100;  
+        E.position.Y = position.y * 100;
+
         Traking.enemySimpelRuns.Add(E);
     }
     public static void EnemySimpelRunDraw (){
@@ -48,5 +49,13 @@ public class EnemySimpelRunLogi
         {
             E.Draw();
         }
+    }
+    public static void EnemySimpelRunUpdate()
+    {
+       foreach (EnemySimpelRun E in Traking.enemySimpelRuns)
+        {
+            E.Update();
+        }
+        Traking.enemySimpelRuns.RemoveAll(E => E.isAlive == false);
     }
 }

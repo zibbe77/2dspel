@@ -116,6 +116,7 @@ public class Mapbox
                 else
                 {
                     trysMap++;
+                    Mapbox.blocks = 0;
                 }
                 test = true;
             }

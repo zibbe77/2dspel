@@ -11,7 +11,6 @@ public class Traking
     public bool[] witchCheckX = { false, false };
     public bool[] witchCheckY = { false, false };
     public Rectangle witchRect = new Rectangle();
-    // public List<Vector2> bulletPos = new List<Vector2>();
     public static List<Bullet> bullets = new List<Bullet>();
     public static List<EnemySimpelRun> enemySimpelRuns = new List<EnemySimpelRun>();
 }
