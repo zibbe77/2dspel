@@ -13,6 +13,7 @@ public class Traking
     public Rectangle witchRect = new Rectangle();
     // public List<Vector2> bulletPos = new List<Vector2>();
     public static List<Bullet> bullets = new List<Bullet>();
+    public static List<EnemySimpelRun> enemySimpelRuns = new List<EnemySimpelRun>();
 }
 public class Toolbox
 {
@@ -32,7 +33,6 @@ public class Toolbox
         }
         Traking.bullets.RemoveAll(b => b.isAlive == false);
     }
-
     public static void DrawBullets()
     {
         foreach (Bullet b in Traking.bullets)
