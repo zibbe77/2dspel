@@ -17,8 +17,15 @@ public class EnemySimpelRun
             Rectangle refrens = new Rectangle((int)b.position.X, (int)b.position.Y, 20, 20);
             foreach (EnemySimpelRun E in Traking.enemySimpelRuns)
             {
-                Rectangle refrensE = new Rectangle((int)E.position.X, (int)E.position.Y, 20, 20);
+                Rectangle refrensE = new Rectangle((int)E.position.X, (int)E.position.Y, 80, 80);
                 bool areOverlapping = Raylib.CheckCollisionRecs(refrensE, refrens);
+                if (areOverlapping == true){
+                    hp--;
+                    b.isAlive = false;
+                }
+                if(hp == 0 ){
+                    isAlive = false;
+                }
             }
         }
 
@@ -26,7 +33,18 @@ public class EnemySimpelRun
     }
     public void Draw()
     {
-        Raylib.DrawRectangle((int)position.X, (int)position.Y, 80, 80, Color.RED);
+        switch(hp){
+            case 3:
+              Raylib.DrawRectangle((int)position.X, (int)position.Y, 80, 80, Color.RED);
+            break;
+             case 2:
+              Raylib.DrawRectangle((int)position.X, (int)position.Y, 80, 80, Color.PURPLE);
+            break;
+             case 1:
+              Raylib.DrawRectangle((int)position.X, (int)position.Y, 80, 80, Color.ORANGE);
+            break;
+        }
+      
     }
 }
 
@@ -44,7 +62,7 @@ public class EnemySimpelRunLogi
         E.position.Y = position.y * 100;
 
         Traking.enemySimpelRuns.Add(E);
-    }
+    } 
     public static void EnemySimpelRunDraw()
     {
         foreach (EnemySimpelRun E in Traking.enemySimpelRuns)
