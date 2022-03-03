@@ -30,16 +30,8 @@ Rectangle[] points = new Rectangle[5];
 
 //räknar på hur stor kartar ska vara 
 Rectangle border = new Rectangle(0, 0, Raylib.GetScreenWidth(), Raylib.GetScreenHeight());
-double floor = Math.Floor(border.width / 100.0) * 100.0;
-double floor1 = Math.Floor(border.height / 100.0) * 100.0;
-int[] mapSize = new int[2];
-
-//konverterar double till int
-mapSize[0] = Convert.ToInt32(floor);
-mapSize[1] = Convert.ToInt32(floor1);
+int[] mapSize = Mapbox.Mapsize(border);
 int[,] grid = new int[mapSize[0], mapSize[1]];
-
-
 
 for (int i = 0; i < 5; i++)
 {
@@ -73,6 +65,10 @@ while (!Raylib.WindowShouldClose())
                 mapOkej = Mapbox.MapControl(grid, mapSize);
             }
             gameState++;
+            
+            for(int i = 0; i < Mapbox.boxes.Count;i++){
+                System.Console.WriteLine(Mapbox.boxes[i]);
+            }
 
             // mapp grafik
             lostSpace = Mapbox.SideBox(mapSize, border);

@@ -10,6 +10,7 @@ public class Mapbox
     public static int trysMap = 0;
     public static Rectangle[] obstical = new Rectangle[4];
     public static List<(int x, int y)> boxes = new List<(int, int)>();
+    public static int[] lostSpaceG = new int[2];
 
     public static int[,] MapCreat(int[] mapSize)
     {
@@ -39,7 +40,18 @@ public class Mapbox
         grid[0, 0] = 0;
         return grid;
     }
+    public static int[] Mapsize(Rectangle border)
+    {
+       
+        double floor = Math.Floor(border.width / 100.0) * 100.0;
+        double floor1 = Math.Floor(border.height / 100.0) * 100.0;
+        int[] mapSize = new int[2];
 
+        //konverterar double till int
+        mapSize[0] = Convert.ToInt32(floor);
+        mapSize[1] = Convert.ToInt32(floor1);
+        return mapSize;
+    }
     public static bool MapControl(int[,] grid, int[] mapSize)
     {
         bool test = false;
@@ -129,7 +141,7 @@ public class Mapbox
         int[] lostSpace = new int[2];
         lostSpace[0] = (int)border.width - mapSize[0];
         lostSpace[1] = (int)border.height - mapSize[1];
-
+        Mapbox.lostSpaceG = lostSpace;
         return lostSpace;
     }
     public static Rectangle[] MapPlace(int[] lostSpace, int[,] grid, int[] mapSize)
