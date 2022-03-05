@@ -59,6 +59,20 @@ public class EnemySimpelRun
         }
 
     }
+    public static void EnemySimpelRunPathfinder()
+    {
+        foreach (EnemySimpelRun E in Traking.enemySimpelRuns)
+        {
+            
+            (float x, int y) position = (0, 0);
+            position.x = (E.position.X - (Mapbox.lostSpaceG[0] / 2)) / 100;
+            System.Console.WriteLine(Mapbox.lostSpaceG[0]/ 2);
+            System.Console.WriteLine($"positon räknad {position.x}");
+            System.Console.WriteLine($"bas positon {E.position.X}");
+            position.y = (int)E.position.Y / 100 - (Mapbox.lostSpaceG[1] / 2);
+
+        }
+    }
 }
 
 public class EnemySimpelRunLogi
@@ -66,13 +80,15 @@ public class EnemySimpelRunLogi
     public static void EnemySimpelRunSpawn()
     {
         (int x, int y) position = Mapbox.boxes[10];
+      
+
         EnemySimpelRunCreat(position);
     }
     public static void EnemySimpelRunCreat((int x, int y) position)
     {
         EnemySimpelRun E = new EnemySimpelRun();
-        E.position.X = position.x * 100;
-        E.position.Y = position.y * 100;
+        E.position.X = position.x * 100 + (Mapbox.lostSpaceG[0] / 2);
+        E.position.Y = position.y * 100 + (Mapbox.lostSpaceG[1] / 2);
 
         Traking.enemySimpelRuns.Add(E);
     }
@@ -90,30 +106,5 @@ public class EnemySimpelRunLogi
             E.Update();
         }
         Traking.enemySimpelRuns.RemoveAll(E => E.isAlive == false);
-    }
-    public static void EnemySimpelRunPathfinder()
-    {
-        bool test = false;
-        bool mapOkej = false;
-        int blockCount = 0;
-        List<(int x, int y)> Que = new List<(int, int)>();
-
-        (int x, int y) gridP = (0, 0);
-        Que.Add((0, 0));
-        
-        gridP = Que[0];
-        try
-        {
-            if (grid[gridP.x + 1, gridP.y] == 0)
-            {
-                grid[gridP.x + 1, gridP.y] = 2;
-                Que.Add((gridP.x + 1, gridP.y));
-                Mapbox.boxes.Add((gridP.x + 1, gridP.y));
-                blockCount++;
-            }
-        }
-        catch { }
-
-        Que.RemoveAt(0);
     }
 }

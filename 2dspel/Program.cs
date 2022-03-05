@@ -65,17 +65,18 @@ while (!Raylib.WindowShouldClose())
                 mapOkej = Mapbox.MapControl(grid, mapSize);
             }
             gameState++;
-            
+           ///* 
             for(int i = 0; i < Mapbox.boxes.Count;i++){
                 System.Console.WriteLine(Mapbox.boxes[i]);
             }
-
+            //*/
             // mapp grafik
             lostSpace = Mapbox.SideBox(mapSize, border);
             borderC = Mapbox.MapBorderCreat(lostSpace);
             Mapbox.obstical = Mapbox.MapPlace(lostSpace, grid, mapSize);
 
             EnemySimpelRunLogi.EnemySimpelRunSpawn();
+            EnemySimpelRun.EnemySimpelRunPathfinder();
             break;
         case 1:
             // rörelse

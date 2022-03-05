@@ -129,6 +129,7 @@ public class Mapbox
                 {
                     trysMap++;
                     Mapbox.blocks = 0;
+                    Mapbox.boxes.Clear();
                 }
                 test = true;
             }
