@@ -65,8 +65,9 @@ while (!Raylib.WindowShouldClose())
                 mapOkej = Mapbox.MapControl(grid, mapSize);
             }
             gameState++;
-           ///* 
-            for(int i = 0; i < Mapbox.boxes.Count;i++){
+            ///* 
+            for (int i = 0; i < Mapbox.boxes.Count; i++)
+            {
                 System.Console.WriteLine(Mapbox.boxes[i]);
             }
             //*/
@@ -79,6 +80,8 @@ while (!Raylib.WindowShouldClose())
             EnemySimpelRun.EnemySimpelRunPathfinder();
             break;
         case 1:
+            //spawn
+            EnemySimpelRunLogi.EnemySimpelRunSpawn();
             // rörelse
             Player.witchRect = Toolbox.Poswitch(Player.witchRect, border, T1, lostSpace);
 

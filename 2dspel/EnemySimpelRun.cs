@@ -63,10 +63,10 @@ public class EnemySimpelRun
     {
         foreach (EnemySimpelRun E in Traking.enemySimpelRuns)
         {
-            
+
             (float x, int y) position = (0, 0);
             position.x = (E.position.X - (Mapbox.lostSpaceG[0] / 2)) / 100;
-            System.Console.WriteLine(Mapbox.lostSpaceG[0]/ 2);
+            System.Console.WriteLine(Mapbox.lostSpaceG[0] / 2);
             System.Console.WriteLine($"positon räknad {position.x}");
             System.Console.WriteLine($"bas positon {E.position.X}");
             position.y = (int)E.position.Y / 100 - (Mapbox.lostSpaceG[1] / 2);
@@ -79,10 +79,14 @@ public class EnemySimpelRunLogi
 {
     public static void EnemySimpelRunSpawn()
     {
-        (int x, int y) position = Mapbox.boxes[10];
-      
+        if (Traking.enemySimpelRuns.Count == 0)
+        {
+            Random generator = new Random();
+            int r = generator.Next(Mapbox.boxes.Count / 2, Mapbox.boxes.Count);
+            (int x, int y) position = Mapbox.boxes[r];
 
-        EnemySimpelRunCreat(position);
+            EnemySimpelRunCreat(position);
+        }
     }
     public static void EnemySimpelRunCreat((int x, int y) position)
     {
