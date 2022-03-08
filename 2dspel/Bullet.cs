@@ -12,8 +12,10 @@ public class Bullet
 
     public void Update()
     {
+        // räknar utt hur skot ska åka 
         position += direction * speed;
 
+        //kolar om den är utanför skärmen 
         if (position.X > Raylib.GetScreenWidth())
         {
             isAlive = false;
@@ -30,10 +32,11 @@ public class Bullet
         {
             isAlive = false;
         }
+        //kolar om den krokar med blocks på kartan 
         for (int i = 0; i < Mapbox.blocks; i++)
-        {  
-            Rectangle refrens = new Rectangle((int)position.X,(int)position.Y,20,20);
-            bool areOverlapping = Raylib.CheckCollisionRecs(refrens, Mapbox.obstical[i] );
+        {
+            Rectangle refrens = new Rectangle((int)position.X, (int)position.Y, 20, 20);
+            bool areOverlapping = Raylib.CheckCollisionRecs(refrens, Mapbox.obstical[i]);
             if (areOverlapping == true)
             {
                 isAlive = false;

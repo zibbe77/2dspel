@@ -45,6 +45,7 @@ public class EnemySimpelRun
     }
     public void Draw()
     {
+        // kolar hp och uptaterar färgen 
         switch (hp)
         {
             case 3:
@@ -61,9 +62,9 @@ public class EnemySimpelRun
     }
     public static void EnemySimpelRunPathfinder()
     {
+        //inte färdig kod för pathfinding 
         foreach (EnemySimpelRun E in Traking.enemySimpelRuns)
         {
-
             (int x, int y) position = (0, 0);
             position.x = Convert.ToInt32(E.position.X);
             position.y = Convert.ToInt32(E.position.Y);
@@ -83,6 +84,7 @@ public class EnemySimpelRunLogi
 {
     public static void EnemySimpelRunSpawn()
     {
+        //slumpar ett positon som är hälften av kartan bort från dig. Men bara pitoner som är tomma.
         if (Traking.enemySimpelRuns.Count == 0)
         {
             Random generator = new Random();
@@ -94,6 +96,7 @@ public class EnemySimpelRunLogi
     }
     public static void EnemySimpelRunCreat((int x, int y) position)
     {
+        //skapar det programet behöver veta när en finde skapas alså postion. 
         EnemySimpelRun E = new EnemySimpelRun();
         E.position.X = position.x * 100 + (Mapbox.lostSpaceG[0] / 2) + 10;
         E.position.Y = position.y * 100 + (Mapbox.lostSpaceG[1] / 2) + 10;
@@ -102,6 +105,7 @@ public class EnemySimpelRunLogi
     }
     public static void EnemySimpelRunDraw()
     {
+        //ritar alla finden (Finns bara en nu)
         foreach (EnemySimpelRun E in Traking.enemySimpelRuns)
         {
             E.Draw();
@@ -109,10 +113,12 @@ public class EnemySimpelRunLogi
     }
     public static void EnemySimpelRunUpdate()
     {
+        //går igenom och uptaterar alla finder
         foreach (EnemySimpelRun E in Traking.enemySimpelRuns)
         {
             E.Update();
         }
+        //tar bort dom från en lista om dom är döda. 
         Traking.enemySimpelRuns.RemoveAll(E => E.isAlive == false);
     }
 }

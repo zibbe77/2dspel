@@ -5,19 +5,21 @@ using System.Collections.Generic;
 
 public class Traking
 {
+    //varjablar som slängs runt
     public int points = 0;
     public string pointsS = "";
     public bool[] picktUpR4 = new bool[5];
     public bool[] witchCheckX = { false, false };
     public bool[] witchCheckY = { false, false };
-    // public Rectangle witchRect = new Rectangle();
     public static List<Bullet> bullets = new List<Bullet>();
     public static List<EnemySimpelRun> enemySimpelRuns = new List<EnemySimpelRun>();
 }
 public class Toolbox
 {
+
     public static void FireBullet(Vector2 position, Vector2 direction)
     {
+        // skapar och kollar vilket håll man ska sjuta åt
         Bullet b = new Bullet();
         b.direction = direction;
         b.position = position;
@@ -26,6 +28,7 @@ public class Toolbox
 
     public static void UpdateBullets()
     {
+        // kollar om skot lever och tar bort dom som inte gör det 
         foreach (Bullet b in Traking.bullets)
         {
             b.Update();
@@ -34,6 +37,7 @@ public class Toolbox
     }
     public static void DrawBullets()
     {
+        // ritar skott
         foreach (Bullet b in Traking.bullets)
         {
             b.Draw();
@@ -42,6 +46,7 @@ public class Toolbox
 
     public static Rectangle Poswitch(Rectangle witchRect, Rectangle border, Traking T1, int[] lostSpace)
     {
+        // kollar hur spelaren rör sig
         for (int i = 0; i < 2; i++)
         {
             T1.witchCheckX[i] = false;
@@ -93,6 +98,7 @@ public class Toolbox
     }
     public static Traking BlockHitboxPlayer(Rectangle r1, Traking T1, Rectangle[] obstical)
     {
+        //kolar om spelaren går in i ett block och tar bort den rörelsen i så fall
         for (int i = 0; i < Mapbox.blocks; i++)
         {
             Raylib.DrawRectangleRec(obstical[i], Color.BLACK);
@@ -107,9 +113,10 @@ public class Toolbox
         }
         return T1;
     }
-    public static Traking PointHitbox (Rectangle r1, Rectangle[] points, Traking T1){
-
-     for (int i = 0; i < 5; i++)
+    public static Traking PointHitbox(Rectangle r1, Rectangle[] points, Traking T1)
+    {
+        //kollar om spelararen går in i poängen och tar bort dom och ger en poäng
+        for (int i = 0; i < 5; i++)
         {
             bool areOverlapping2 = Raylib.CheckCollisionRecs(r1, points[i]);
             if (T1.picktUpR4[i] == false && areOverlapping2 == false)

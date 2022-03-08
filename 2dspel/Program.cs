@@ -8,8 +8,8 @@ Raylib.InitWindow(Raylib.GetScreenWidth(), Raylib.GetScreenHeight(), "Hello Worl
 Raylib.SetTargetFPS(60);
 
 //play sound
-// SoundPlayer player = new SoundPlayer(@"Harvest Dawn.wav");
-// player.Play();
+SoundPlayer player = new SoundPlayer(@"Harvest Dawn.wav");
+player.Play();
 
 //skapar en spelar
 Player p1 = new Player();
@@ -33,6 +33,7 @@ Rectangle border = new Rectangle(0, 0, Raylib.GetScreenWidth(), Raylib.GetScreen
 int[] mapSize = Mapbox.Mapsize(border);
 int[,] grid = new int[mapSize[0], mapSize[1]];
 
+//skaper poängen 
 for (int i = 0; i < 5; i++)
 {
     Rectangle pointsRefrens = new Rectangle(Raylib.GetScreenWidth() / 3, Raylib.GetScreenHeight() / 2 + i * 40, 20, 20);
@@ -40,13 +41,16 @@ for (int i = 0; i < 5; i++)
     T1.picktUpR4[i] = false;
 }
 
+//väljer skriv still
 Font f1 = Raylib.LoadFont(@"Metrophobic.ttf");
 
 //för switchen ska fungera
 int gameState = 0;
+
 // nåra varjablar som behvde ut ur switchen
 Rectangle[] borderC = new Rectangle[4];
 int[] lostSpace = new int[2];
+
 while (!Raylib.WindowShouldClose())
 {
     switch (gameState)
@@ -65,12 +69,13 @@ while (!Raylib.WindowShouldClose())
                 mapOkej = Mapbox.MapControl(grid, mapSize);
             }
             gameState++;
-            ///* 
+
+            // debug för vilka positoner som är toma (printar dom)
             for (int i = 0; i < Mapbox.boxes.Count; i++)
             {
                 System.Console.WriteLine(Mapbox.boxes[i]);
             }
-            //*/
+
             // mapp grafik
             lostSpace = Mapbox.SideBox(mapSize, border);
             borderC = Mapbox.MapBorderCreat(lostSpace);
@@ -103,14 +108,22 @@ while (!Raylib.WindowShouldClose())
             //ritar saker
             Raylib.BeginDrawing();
 
-            Mapbox.MapBorderDraw(borderC);
-            EnemySimpelRunLogi.EnemySimpelRunDraw();
-
+            //tar bort allt som är ritat 
             Raylib.ClearBackground(Color.WHITE);
 
+            //ritar kanten 
+            Mapbox.MapBorderDraw(borderC);
+
+            //ritar finden 
+            EnemySimpelRunLogi.EnemySimpelRunDraw();
+
+            //skriver text för hur många poäng du har
             Raylib.DrawText(T1.pointsS, 100, 50, 20, Color.ORANGE);
 
+            //ritar spelarens textur
             Raylib.DrawTexture(witchTexture, x, y, Color.WHITE);
+
+            //ritar skoten
             Toolbox.DrawBullets();
 
             Raylib.EndDrawing();
@@ -119,6 +132,7 @@ while (!Raylib.WindowShouldClose())
             gameState = Player.PlayerAlive(gameState);
             break;
         case 2:
+            //ritar utt du dog
             Raylib.BeginDrawing();
             Raylib.ClearBackground(Color.WHITE);
             Raylib.DrawText("You Died", 100, Raylib.GetScreenHeight() / 2 - 300, 400, Color.BLACK);
