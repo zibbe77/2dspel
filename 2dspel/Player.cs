@@ -9,7 +9,7 @@ public class Player
     public static bool isAlive = true;
     public void Update()
     {
-        // Köra spelarens förflyttningskod etc
+        // Kollar om man ska kunna sjuta än och om var du vill sjuta 
         if (Bullet.reloadtimer == 0)
         {
             Vector2 bulletDirection = new Vector2();
@@ -52,6 +52,7 @@ public class Player
     }
     public static int PlayerAlive(int gameState)
     {
+        // kollar om spelaren är i live 
         if (Player.isAlive == false)
         {
             gameState++;

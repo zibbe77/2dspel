@@ -14,6 +14,7 @@ public class Mapbox
 
     public static int[,] MapCreat(int[] mapSize)
     {
+        // slumpar utt en vilka block som är otiljänliga 
         Random generator = new Random();
         int[,] grid = new int[mapSize[0] / 100, mapSize[1] / 100];
 
@@ -42,7 +43,7 @@ public class Mapbox
     }
     public static int[] Mapsize(Rectangle border)
     {
-
+        //räknar hur stor kartan är 
         double floor = Math.Floor(border.width / 100.0) * 100.0;
         double floor1 = Math.Floor(border.height / 100.0) * 100.0;
         int[] mapSize = new int[2];
@@ -54,9 +55,12 @@ public class Mapbox
     }
     public static bool MapControl(int[,] grid, int[] mapSize)
     {
+        //testar om kartan är okej att spella på 
         bool test = false;
         bool mapOkej = false;
         int blockCount = 0;
+
+        // lista av block som är kvar att kolla
         List<(int x, int y)> Que = new List<(int, int)>();
 
         (int x, int y) gridP = (0, 0);
@@ -111,6 +115,7 @@ public class Mapbox
             catch { }
             Que.RemoveAt(0);
 
+            //när listan är tom så ska den kolla om den är bra nu är den satt på 70% ska vara tilljänlig 
             if (Que.Count == 0)
             {
                 System.Console.WriteLine($"{blockCount} antal block");
@@ -139,6 +144,7 @@ public class Mapbox
 
     public static int[] SideBox(int[] mapSize, Rectangle border)
     {
+        //räknar på hur mycket som fins kvar på sidan 
         int[] lostSpace = new int[2];
         lostSpace[0] = (int)border.width - mapSize[0];
         lostSpace[1] = (int)border.height - mapSize[1];
@@ -147,6 +153,7 @@ public class Mapbox
     }
     public static Rectangle[] MapPlace(int[] lostSpace, int[,] grid, int[] mapSize)
     {
+        //kollar visa positoner ska blockas och sedan skapar en mall 
         Rectangle[] obstical = new Rectangle[blocks];
         int i = 0;
 
@@ -167,7 +174,7 @@ public class Mapbox
 
     public static Rectangle[] MapBorderCreat(int[] lostSpace)
     {
-
+        //skapar den svart kanten
         Rectangle[] borderC = new Rectangle[4]
         {
         new Rectangle(0, 0, Raylib.GetScreenWidth(), lostSpace[1] / 2),
@@ -179,6 +186,7 @@ public class Mapbox
     }
     public static void MapBorderDraw(Rectangle[] borderC)
     {
+        //ritar den svart kanten
         for (int i = 0; i < 4; i++)
         {
             Raylib.DrawRectangleRec(borderC[i], Color.BLACK);
