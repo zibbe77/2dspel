@@ -42,7 +42,7 @@ public class Mapbox
     }
     public static int[] Mapsize(Rectangle border)
     {
-       
+
         double floor = Math.Floor(border.width / 100.0) * 100.0;
         double floor1 = Math.Floor(border.height / 100.0) * 100.0;
         int[] mapSize = new int[2];
@@ -82,7 +82,7 @@ public class Mapbox
                 {
                     grid[gridP.x, gridP.y + 1] = 2;
                     Que.Add((gridP.x, gridP.y + 1));
-                    Mapbox.boxes.Add((gridP.x + 1, gridP.y));
+                    Mapbox.boxes.Add((gridP.x, gridP.y + 1));
                     blockCount++;
                 }
             }
@@ -93,7 +93,7 @@ public class Mapbox
                 {
                     grid[gridP.x - 1, gridP.y] = 2;
                     Que.Add((gridP.x - 1, gridP.y));
-                    Mapbox.boxes.Add((gridP.x + 1, gridP.y));
+                    Mapbox.boxes.Add((gridP.x - 1, gridP.y));
                     blockCount++;
                 }
             }
@@ -104,7 +104,7 @@ public class Mapbox
                 {
                     grid[gridP.x, gridP.y - 1] = 2;
                     Que.Add((gridP.x, gridP.y - 1));
-                    Mapbox.boxes.Add((gridP.x + 1, gridP.y));
+                    Mapbox.boxes.Add((gridP.x, gridP.y - 1));
                     blockCount++;
                 }
             }
@@ -179,7 +179,6 @@ public class Mapbox
     }
     public static void MapBorderDraw(Rectangle[] borderC)
     {
-
         for (int i = 0; i < 4; i++)
         {
             Raylib.DrawRectangleRec(borderC[i], Color.BLACK);
